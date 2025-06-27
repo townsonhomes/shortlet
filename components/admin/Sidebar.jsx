@@ -14,7 +14,8 @@ import {
 import { X } from "lucide-react";
 import LogoutConfirmModal from "@/components/ConfirmModal";
 import { signOut } from "next-auth/react";
-import { useState } from "react";
+import { Suspense, useState } from "react";
+import Loader from "@/components/Loader";
 
 const links = [
   { label: "Bookings", icon: <FaClipboardList />, view: "bookings" },
@@ -24,7 +25,7 @@ const links = [
   { label: "Settings", icon: <FaCog />, view: "settings" },
 ];
 
-export default function AdminSidebar({ isOpen, onClose }) {
+function AdminSidebar({ isOpen, onClose }) {
   const searchParams = useSearchParams();
   const currentView = searchParams.get("view") || "bookings";
   const router = useRouter();
@@ -113,5 +114,13 @@ function SidebarContent({ currentView, handleClick }) {
         confirmText="Yes, Logout"
       />
     </>
+  );
+}
+
+export default function PageSuspense({ isOpen, onClose }) {
+  return (
+    <Suspense fallback={<Loader />}>
+      <AdminSidebar isOpen={isOpen} onClose={onClose} />
+    </Suspense>
   );
 }

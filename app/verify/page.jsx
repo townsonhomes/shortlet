@@ -1,10 +1,11 @@
 "use client";
 
 import { useSearchParams, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import axios from "axios";
+import Loader from "@/components/Loader";
 
-export default function VerifyPage() {
+function VerifyPage() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const [message, setMessage] = useState("Verifying...");
@@ -28,5 +29,13 @@ export default function VerifyPage() {
     <div className="min-h-screen flex justify-center items-center text-xl">
       {message}
     </div>
+  );
+}
+
+export default function VerifyPageSuspense() {
+  return (
+    <Suspense fallback={<Loader />}>
+      <VerifyPage />
+    </Suspense>
   );
 }

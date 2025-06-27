@@ -1,13 +1,14 @@
 "use client";
 
 import { useParams, useSearchParams, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import toast from "react-hot-toast";
 import { usePaystack } from "@/hooks/usePaystack";
+import Loader from "@/components/Loader";
 
-export default function BookingPage() {
+function BookingPage() {
   const { roomId } = useParams();
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -215,5 +216,13 @@ function BookingSummary({
         </div>
       </div>
     </div>
+  );
+}
+
+export default function BookingPageSuspense() {
+  return (
+    <Suspense fallback={<Loader />}>
+      <BookingPage />
+    </Suspense>
   );
 }
