@@ -1,4 +1,4 @@
-import { connectDB } from "@/utils/dbConnect";
+import { connectDB } from "@/lib/dbConnect";
 import BookingPending from "@/models/BookingPending";
 
 export async function POST(req) {

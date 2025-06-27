@@ -1,7 +1,7 @@
 // /app/api/verify-request/route.js
 import jwt from "jsonwebtoken";
 import { sendEmail } from "@/lib/email/sendEmail";
-import { generateVerificationEmail } from "@/utils/email/templates/emailVerification";
+import { generateVerificationEmail } from "@/lib/email/templates/emailVerification";
 
 const JWT_SECRET = process.env.JWT_SECRET;
 
