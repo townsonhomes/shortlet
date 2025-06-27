@@ -1,0 +1,18 @@
+role=user protection:
+/profile
+/api/profile
+/api/payment
+/api/emails
+/api/verify
+/api/verify-request
+
+
+role=admin protection:
+/admin
+/api/admin
+/api/shortlets/create
+/api/shortlets/test
+/api/upload
+/api/bookings
+
+/api/change-password is used by both user and admin roles
