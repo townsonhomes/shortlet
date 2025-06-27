@@ -74,7 +74,7 @@ export async function POST(req) {
 
   // 6️⃣  — call internal add-booking route
   // NOTE: use your own site URL (env or hard-code). In Vercel use VERCE_URL or custom domain.
-  const baseURL = process.env.NEXT_PUBLIC_APP_URL || "https://your-site.com";
+  const baseURL = process.env.NEXT_PUBLIC_BASE_URL;
   const res = await fetch(`${baseURL}/api/bookings/addBooking`, {
     method: "POST",
     headers: {
