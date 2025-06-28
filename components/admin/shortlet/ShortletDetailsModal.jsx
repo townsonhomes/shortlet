@@ -5,7 +5,7 @@ import { X } from "lucide-react";
 
 export default function ShortletDetailsModal({ shortlet, onClose }) {
   return (
-    <div className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm flex justify-center items-start pt-20 overflow-y-auto">
+    <div className="fixed px-[5%] inset-0 z-50 bg-black/40 backdrop-blur-sm flex justify-center items-start pt-20 overflow-y-auto">
       <div className="bg-white w-full max-w-3xl rounded-xl shadow-lg p-6 relative animate-fadeIn space-y-4">
         <button
           onClick={onClose}

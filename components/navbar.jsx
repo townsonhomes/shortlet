@@ -59,7 +59,7 @@ export default function Navbar() {
   }, []);
 
   return (
-    <header className="w-full px-4 md:px-16 py-4 flex items-center justify-between bg-white relative z-50 shadow">
+    <header className="w-full px-4 md:px-16 py-4 max-sm:py-2 flex items-center justify-between bg-white relative z-50 shadow">
       {/* Logo */}
       <Link href="/" className="text-xl font-bold flex items-center z-50">
         <Image
@@ -140,6 +140,7 @@ export default function Navbar() {
                       : "/profile"
                   }
                   className="flex items-center px-4 py-2 hover:bg-gray-100 text-gray-700"
+                  onClick={() => setDropdownOpen(false)}
                 >
                   <FaUser className="mr-2" />
                   {session.user.role === "admin" ? "Dashboard" : "My Profile"}
@@ -157,12 +158,18 @@ export default function Navbar() {
         ) : (
           <div className="hidden md:flex gap-3">
             <Link href="/register">
-              <button className="px-4 py-1.5 border border-gray-300 rounded-full text-sm hover:bg-black hover:text-white font-medium transition">
+              <button
+                onClick={() => setMenuOpen(false)}
+                className="px-4 py-1.5 border border-gray-300 rounded-full text-sm hover:bg-black hover:text-white font-medium transition"
+              >
                 Sign Up
               </button>
             </Link>
             <Link href="/login">
-              <button className="px-4 py-1.5 bg-black text-white rounded-full text-sm hover:bg-yellow-600 hover:text-black font-medium transition">
+              <button
+                onClick={() => setMenuOpen(false)}
+                className="px-4 py-1.5 bg-black text-white rounded-full text-sm hover:bg-yellow-600 hover:text-black font-medium transition"
+              >
                 Log in
               </button>
             </Link>
@@ -187,7 +194,7 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       <div
-        className={`md:hidden fixed top-16 left-0 w-full h-[calc(100vh-4rem)] bg-white z-40 transition-all duration-300 ease-in-out transform ${
+        className={`md:hidden fixed top-16 bottom-0 left-0 w-full h-[calc(100vh - 4rem)] bg-white z-40 transition-all duration-300 ease-in-out transform ${
           menuOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
@@ -208,12 +215,18 @@ export default function Navbar() {
             {!session?.user ? (
               <>
                 <Link href="/register" className="flex-1">
-                  <button className="w-full py-3 border border-black rounded-full text-sm hover:bg-black hover:text-white font-medium transition">
+                  <button
+                    onClick={() => setMenuOpen(false)}
+                    className="w-full py-3 border border-black rounded-full text-sm hover:bg-black hover:text-white font-medium transition"
+                  >
                     Sign Up
                   </button>
                 </Link>
                 <Link href="/login" className="flex-1">
-                  <button className="w-full py-3 bg-black text-white rounded-full text-sm hover:bg-yellow-600 hover:text-black font-medium transition">
+                  <button
+                    onClick={() => setMenuOpen(false)}
+                    className="w-full py-3 bg-black text-white rounded-full text-sm hover:bg-yellow-600 hover:text-black font-medium transition"
+                  >
                     Log in
                   </button>
                 </Link>

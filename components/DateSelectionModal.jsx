@@ -65,7 +65,7 @@ export default function DateSelectionModal({
   if (!isOpen || typeof window === "undefined") return null;
 
   return ReactDOM.createPortal(
-    <div className="fixed inset-0 z-[100] bg-black/40 backdrop-blur-sm flex items-center justify-center">
+    <div className="fixed inset-0 z-[100] bg-black/40 backdrop-blur-sm flex items-center justify-center px-[5%]">
       <div className="bg-white rounded-2xl p-6 w-full max-w-md shadow-xl">
         <h2 className="text-xl font-semibold mb-4 text-center text-neutral-800">
           Choose Your Stay Dates

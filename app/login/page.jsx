@@ -39,7 +39,7 @@ export default function LoginPage() {
 
   return (
     <div
-      className="flex relative items-center justify-center min-h-screen bg-cover bg-center"
+      className="flex relative items-center justify-center min-h-screen bg-cover bg-center px-[5%]"
       style={{ backgroundImage: "url(/images/house1.png)" }}
     >
       <div className="absolute inset-0 bg-black/40 backdrop-blur-[5px]"></div>
