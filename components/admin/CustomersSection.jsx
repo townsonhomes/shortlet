@@ -4,6 +4,7 @@ import { useState, useMemo } from "react";
 import { Mail } from "lucide-react";
 import SearchBar from "../SearchBar";
 import MessageModal from "@/components/admin/MessageModal";
+import toast from "react-hot-toast";
 
 export default function GuestsTable({ users }) {
   const [searchQuery, setSearchQuery] = useState("");
@@ -21,9 +22,9 @@ export default function GuestsTable({ users }) {
   return (
     <div className="bg-white shadow rounded-lg overflow-hidden">
       <div className="px-6 py-4 border-b border-gray-100 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-        <h2 className="text-lg font-semibold text-gray-700">Guests</h2>
+        <h2 className="text-lg font-semibold text-gray-700">Customers</h2>
         <div className="px-4 py-1 text-sm text-gray-900 font-bold mx-auto rounded-xl bg-amber-200">
-          Number of Guests: {users.length}
+          Registered Customers: {users.length}
         </div>
         <SearchBar
           value={searchQuery}

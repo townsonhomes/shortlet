@@ -5,40 +5,47 @@ import { useState, useEffect } from "react";
 
 const newsItems = [
   {
-    image: "/images/news1.png",
-    title: "New Airport Terminal Opens Near Hotel Mangroove",
-    desc: "Lorem ipsum dolor sit amet consectetur. Semper gravida a volutpat egestas risus scelerisque amet.",
+    image: "/images/news_1.png",
+    title: "Most expensive African countries to rent a home in 2025",
+    desc: "Africa’s urban population is expanding rapidly, and with it, the demand for housing continues to intensify.",
     time: "2 hours ago",
+    link: "https://nairametrics.com/2025/06/24/most-expensive-african-countries-to-rent-a-home-in-2025/",
   },
   {
-    image: "/images/news2.png",
-    title: "Upcoming Cultural Festival in Lagos",
-    desc: "Lorem ipsum dolor sit amet consectetur. Semper gravida a volutpat egestas risus scelerisque amet.",
+    image: "/images/news_2.png",
+    title: "Top 10 African countries leading hotel development in Q1 2025",
+    desc: "As of early 2025, hotel chains across Africa had 577 projects in the pipeline,",
     time: "May 19, 2025",
+    link: "https://nairametrics.com/2025/04/13/top-10-african-countries-leading-hotel-development-in-q1-2025/",
   },
   {
-    image: "/images/news3.png",
-    title: "Lagos Bans Singles in Tourist Zones",
-    desc: "Lorem ipsum dolor sit amet consectetur. Semper gravida a volutpat egestas risus scelerisque amet.",
+    image: "/images/news_3.png",
+    title:
+      "Cross River govt cancels CIBA’s 25-year Obudu Ranch concession over unmet obligations.",
+    desc: "The Cross River State Government has revoked the 25-year concession agreement with CIBA Construction Company Limited for the management of Obudu Cattle Ranch",
     time: "2 hours ago",
+    link: "https://nairametrics.com/2025/03/05/cross-river-govt-cancels-cibas-25-year-obudu-ranch-concession-over-unmet-obligations/",
   },
   {
-    image: "/images/news1.png",
-    title: "Luxury Spa Services Launch in City Center Hotels",
-    desc: "Indulge in premium wellness services at our newly opened spa facilities.",
+    image: "/images/news4.png",
+    title: "voco The Shelby – Myrtle Beach",
+    desc: "voco The Shelby – Myrtle Beach Introduces a New Era of Coastal Hospitality Along the Grand Strand.",
     time: "3 days ago",
+    link: "https://www.hospitalitynet.org/announcement/41012827/voco-the-shelby-myrtle-beach.html",
   },
   {
-    image: "/images/news2.png",
-    title: "Beachfront Resorts Now Open for the Summer Season",
-    desc: "Enjoy sunny views, beach parties, and more all season long.",
+    image: "/images/news5.png",
+    title: "BLamangata Luxury Surf Resort",
+    desc: "Now Open: Lamangata Luxury Surf Resort, a Sustainable Costa Rican Retreat.",
     time: "June 1, 2025",
+    link: "https://www.hospitalitynet.org/announcement/41012826/lamangata-luxury-surf-resort.html",
   },
   {
-    image: "/images/news3.png",
+    image: "/images/news6.png",
     title: "Eco-Friendly Lodging Takes Spotlight in 2025",
     desc: "Green architecture and energy-saving tech are transforming hospitality.",
     time: "1 day ago",
+    link: "https://www.hospitalitynet.org/announcement/41012825/rimrock-banff-emblems-collection.html",
   },
 ];
 
@@ -112,7 +119,7 @@ export default function NewsSection() {
                     <FaClock className="mr-2" /> {item.time}
                   </div>
                   <a
-                    href="#"
+                    href={item.link}
                     className="text-sm font-semibold text-black flex items-center gap-1 group"
                   >
                     Learn More{" "}

@@ -54,10 +54,10 @@ export default function RoomCard({ room }) {
         </div>
 
         <div className="bg-gray-100 px-5 py-3 flex items-center justify-between">
-          <AvailabilityTag status={availableText} isNow={!isBookedNow} />
+          {/* <AvailabilityTag status={availableText} isNow={!isBookedNow} /> */}
           <button
             onClick={() => setIsOpen(true)}
-            className="bg-neutral-900 text-white rounded px-4 py-2 text-sm hover:bg-neutral-700 transition"
+            className="bg-neutral-900 text-white rounded px-4 py-2 text-sm hover:bg-neutral-700 transition ml-auto"
           >
             Select
           </button>

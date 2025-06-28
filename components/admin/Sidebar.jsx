@@ -20,7 +20,7 @@ import Loader from "@/components/Loader";
 const links = [
   { label: "Bookings", icon: <FaClipboardList />, view: "bookings" },
   { label: "Shortlets", icon: <FaBed />, view: "apartments" },
-  { label: "Guests", icon: <FaUsers />, view: "guests" },
+  { label: "Customers", icon: <FaUsers />, view: "guests" },
   { label: "Services", icon: <FaConciergeBell />, view: "services" },
   { label: "Settings", icon: <FaCog />, view: "settings" },
 ];
@@ -38,7 +38,7 @@ function AdminSidebar({ isOpen, onClose }) {
   return (
     <>
       {/* Desktop Sidebar */}
-      <aside className="hidden lg:flex flex-col fixed top-0  left-0 w-56 h-screen bg-white shadow px-4 py-6 pt-[8%] overflow-y-auto z-30">
+      <aside className="hidden lg:flex flex-col fixed top-0  left-0 w-56 h-screen bg-white shadow px-4 py-6 pt-[11%] overflow-y-auto z-30">
         <SidebarContent currentView={currentView} handleClick={handleClick} />
       </aside>
 

@@ -6,19 +6,19 @@ import { motion, AnimatePresence } from "framer-motion";
 const testimonials = [
   {
     text: "The hospitality was incredible. From check-in to check-out, the service was seamless and welcoming.",
-    name: "James Harrison",
+    name: "Ali Musa",
     rating: 5,
     image: "/images/reviewer1.png",
   },
   {
     text: "I loved the atmosphere and cleanliness. The staff were attentive and the location was perfect.",
-    name: "Felicia Godwin",
+    name: "Felicia Peters",
     rating: 4,
     image: "/images/reviewer1.png",
   },
   {
     text: "Honestly the best stay I’ve had in years. Comfortable rooms and top-notch service.",
-    name: "James Harrison",
+    name: "James Ake",
     rating: 5,
     image: "/images/reviewer1.png",
   },
@@ -30,7 +30,7 @@ const testimonials = [
   },
   {
     text: "Wonderful atmosphere and friendly staff. Will definitely come back again.",
-    name: "Michael Lee",
+    name: "Michael Abogu",
     rating: 4,
     image: "/images/reviewer1.png",
   },
@@ -114,13 +114,13 @@ export default function TestimonialsSection() {
                   {item.text}
                 </p>
                 <div className="flex items-center gap-4">
-                  <Image
+                  {/* <Image
                     src={item.image}
                     alt={item.name}
                     width={72}
                     height={72}
                     className="rounded-full"
-                  />
+                  /> */}
                   <div>
                     <p className="font-semibold text-black text-lg">
                       {item.name}

@@ -31,7 +31,7 @@ export default function Navbar() {
   const navItems = [
     { label: "Home", href: "/", icon: <FaHome className="md:hidden mr-3" /> },
     {
-      label: "Short let",
+      label: "Short-Let",
       href: "/search",
       icon: <FaBed className="md:hidden mr-3" />,
     },
@@ -80,10 +80,16 @@ export default function Navbar() {
             <Link
               key={item.label}
               href={item.href}
-              className="py-1 text-gray-700 hover:text-yellow-700 font-medium relative group transition-colors duration-200"
+              className={`py-1 text-gray-700 hover:text-yellow-700 ${
+                pathname === item.href && "text-yellow-700"
+              } font-medium relative group transition-colors duration-200`}
             >
               {item.label}
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-yellow-600 transition-all duration-300 group-hover:w-full"></span>
+              <span
+                className={`absolute bottom-0 left-0 w-0 h-0.5 bg-yellow-600 ${
+                  pathname === item.href && " w-full"
+                } transition-all duration-300 group-hover:w-full`}
+              ></span>
             </Link>
           ))}
         </div>

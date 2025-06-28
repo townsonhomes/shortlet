@@ -92,7 +92,9 @@ export async function POST(req) {
   // Notification for user
   await Notification.create({
     user,
-    message: `Booking confirmed for ${checkInDate} → ${checkOutDate}`,
+    message: `Booking confirmed for ${
+      checkInDate.toISOString().split("T")[0]
+    } → ${checkOutDate.toISOString().split("T")[0]}`,
   });
 
   /* ──────────────────────────────────────────────────────────────── */

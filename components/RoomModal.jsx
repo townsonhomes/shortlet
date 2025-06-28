@@ -49,11 +49,21 @@ export default function RoomModal({ isOpen, onClose, room }) {
 
   const handleConfirmDates = (newCheckIn, newCheckOut) => {
     setShowDateModal(false);
+    const { _id: roomId, bookedDates } = room;
+    const bookingData = {
+      roomId,
+      checkInDate: newCheckIn,
+      checkOutDate: newCheckOut,
+    };
 
-    // Optional: Update context or bookingDates here
-    router.push(
-      `/booking/${room._id}?checkInDate=${newCheckIn}&checkOutDate=${newCheckOut}`
-    );
+    if (session?.user) {
+      router.push(
+        `/booking/${roomId}?checkInDate=${newCheckIn}&checkOutDate=${newCheckOut}`
+      );
+    } else {
+      localStorage.setItem("bookingData", JSON.stringify(bookingData));
+      router.push("/login");
+    }
   };
 
   const facilities = room.amenities;

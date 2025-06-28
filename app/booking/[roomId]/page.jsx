@@ -28,9 +28,7 @@ function BookingPage() {
 
   useEffect(() => {
     if (status === "unauthenticated") {
-      router.push(
-        `/login?redirect=/booking/${roomId}?checkInDate=${checkInDate}&checkOutDate=${checkOutDate}`
-      );
+      router.push(`/login`);
     }
   }, [status]);
 
@@ -56,7 +54,11 @@ function BookingPage() {
   }, [roomId, checkInDate, checkOutDate]);
 
   if (status === "loading" || !room) {
-    return <div className="p-6 text-center text-gray-500">Loading...</div>;
+    return (
+      <div className="min-h-[70vh] flex items-center justify-center">
+        <Loader />
+      </div>
+    );
   }
 
   const checkIn = new Date(checkInDate);

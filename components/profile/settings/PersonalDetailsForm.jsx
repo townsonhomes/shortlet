@@ -38,6 +38,7 @@ export default function PersonalDetailsForm({ user }) {
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "Failed to update user");
       toast.success("Profile updated successfully");
+      window.location.reload();
       //return data.user; // safely parsed
     } catch (err) {
       toast.error("Failed to update profile");

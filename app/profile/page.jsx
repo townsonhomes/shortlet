@@ -33,7 +33,6 @@ export default async function ProfilePage() {
 
   const book = JSON.parse(JSON.stringify(bookings));
   //console.log(services);
-
   return (
     <Suspense fallback={<Loader />}>
       <ProfileLayout
@@ -49,7 +48,7 @@ export default async function ProfilePage() {
 // Loading spinner component
 function Loader() {
   return (
-    <div className="flex flex-col items-center justify-center py-20 text-center">
+    <div className="flex flex-col items-center min-h-[70vh] justify-center py-20 text-center">
       <svg
         className="animate-spin h-8 w-8 text-blue-500 mb-4"
         xmlns="http://www.w3.org/2000/svg"
@@ -70,7 +69,6 @@ function Loader() {
           d="M4 12a8 8 0 018-8v8z"
         />
       </svg>
-      <p className="text-gray-600 text-sm">Loading your profile...</p>
     </div>
   );
 }

@@ -1,11 +1,9 @@
-import Navbar from "@/components/navbar";
-import Footer from "@/components/Footer";
+// app/layout.js
 import "./globals.css";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 import { Providers } from "./providers";
-import { ProfileDrawerProvider } from "@/context/ProfileDrawerContext";
-import TawkToWidget from "@/components/TawkToWidget";
+import LayoutClient from "./LayoutClient";
 
 export const metadata = {
   title: "Townson Apartments & Homes",
@@ -16,13 +14,8 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className="antialiased">
-        <TawkToWidget />
         <Providers>
-          <ProfileDrawerProvider>
-            <Navbar />
-            {children}
-            <Footer />
-          </ProfileDrawerProvider>
+          <LayoutClient>{children}</LayoutClient>
         </Providers>
       </body>
     </html>
