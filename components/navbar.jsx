@@ -31,7 +31,7 @@ export default function Navbar() {
   const navItems = [
     { label: "Home", href: "/", icon: <FaHome className="md:hidden mr-3" /> },
     {
-      label: "Short-Let",
+      label: "Short-Lets",
       href: "/search",
       icon: <FaBed className="md:hidden mr-3" />,
     },

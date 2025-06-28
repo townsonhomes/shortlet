@@ -34,7 +34,7 @@ const contactDetails = [
 
 const menuLinks = [
   { name: "Home", link: "/" },
-  { name: "Short-Let", link: "/search" },
+  { name: "Short-Lets", link: "/search" },
   { name: "About Us", link: "/about" },
   { name: "Contact Us", link: "/contact-us" },
 ];

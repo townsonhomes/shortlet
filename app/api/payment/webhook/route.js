@@ -52,6 +52,7 @@ async function queueBackgroundWork(raw) {
     /* 2️⃣  Build payload for /addBooking */
     const payload = {
       shortlet: pending.shortlet,
+      name: metadata.name,
       user: pending.user,
       checkInDate: pending.checkInDate,
       checkOutDate: pending.checkOutDate,

@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function VerifyEmailPage() {
   return (
-    <div className="min-h-screen flex flex-col justify-center items-center px-4 bg-gradient-to-br from-yellow-50 via-white to-yellow-100">
+    <div className="min-h-screen flex flex-col justify-center items-center px-[5%] bg-gradient-to-br from-yellow-50 via-white to-yellow-100">
       <div className="max-w-md w-full bg-white shadow-xl rounded-xl p-8 text-center border border-yellow-100">
         <div className="flex justify-center mb-6">
           <div className="bg-yellow-500 text-white p-4 rounded-full shadow-md">

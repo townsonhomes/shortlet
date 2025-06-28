@@ -42,6 +42,7 @@ export async function POST(req) {
 
   const {
     shortlet: shortletId,
+    name,
     user,
     checkInDate,
     checkOutDate,
@@ -90,12 +91,25 @@ export async function POST(req) {
   });
   await shortlet.save();
 
+  const res = await fetch("/api/emails/sendAPI", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      email,
+      name,
+      shortlet: shortlet.title,
+      checkInDate,
+      checkOutDate,
+      totalAmount,
+    }),
+  });
+
   // Notification for user
   await Notification.create({
     user,
     message: `Booking confirmed for ${
-      checkInDate.toISOString().split("T")[0]
-    } → ${checkOutDate.toISOString().split("T")[0]}`,
+      new Date(checkInDate).toISOString().split("T")[0]
+    } → ${new Date(checkOutDate).toISOString().split("T")[0]}`,
   });
 
   /* ──────────────────────────────────────────────────────────────── */

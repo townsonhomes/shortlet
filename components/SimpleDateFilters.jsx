@@ -14,9 +14,9 @@ export default function SimpleDateFilters({ checkIn, checkOut, onChange }) {
         <input
           type="date"
           id="check-in"
-          value={checkIn || new Date().toISOString().split("T")[0]}
+          value={checkIn || ""}
           onChange={(e) => onChange("checkIn", e.target.value)}
-          className="px-3 py-2 border rounded-md text-sm focus:ring-yellow-500 focus:outline-none"
+          className="px-3 py-2 border rounded-md text-sm focus:ring-yellow-500 focus:outline-none min-h-[2.5rem] min-w-[7rem]"
         />
       </div>
 
@@ -27,9 +27,9 @@ export default function SimpleDateFilters({ checkIn, checkOut, onChange }) {
         <input
           type="date"
           id="check-out"
-          value={checkOut || formattedTomorrow}
+          value={checkOut || ""}
           onChange={(e) => onChange("checkOut", e.target.value)}
-          className="px-3 py-2 border rounded-md text-sm focus:ring-yellow-500 focus:outline-none"
+          className="px-3 py-2 border rounded-md text-sm focus:ring-yellow-500 focus:outline-none min-h-[2.5rem] min-w-[7rem]"
         />
       </div>
     </div>

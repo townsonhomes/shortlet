@@ -1,0 +1,71 @@
+{
+  "event": "charge.success",
+  "data": {
+    "id": 5097850347,
+    "domain": "live",
+    "status": "success",
+    "reference": "T936363407949236",
+    "amount": 10000,
+    "message": "",
+    "gateway_response": "Approved",
+    "paid_at": "2025-06-28T14:48:51.000Z",
+    "created_at": "2025-06-28T14:46:23.000Z",
+    "channel": "card",
+    "currency": "NGN",
+    "ip_address": "102.91.105.76",
+    "metadata": {
+      "pendingId": "6860003d8ef332de97245f51",
+      "name": "Michael Ibitoye",
+      "roomId": "685e5732baf3e4218917a983",
+      "checkInDate": "2025-07-01",
+      "checkOutDate": "2025-07-02",
+      "userId": "685e4bf66e31bcd462c20178",
+      "referrer": "https://shortlet-beta.vercel.app/booking/685e5732baf3e4218917a983?checkInDate=2025-07-01&checkOutDate=2025-07-02"
+    },
+    "fees_breakdown": { "amount": "150", "formula": null, "type": "paystack" },
+    "log": null,
+    "fees": 150,
+    "fees_split": null,
+    "authorization": {
+      "authorization_code": "AUTH_6ev66b08if",
+      "bin": "468219",
+      "last4": "2140",
+      "exp_month": "07",
+      "exp_year": "2025",
+      "channel": "card",
+      "card_type": "visa debit",
+      "bank": "Fidelity Bank",
+      "country_code": "NG",
+      "brand": "visa",
+      "reusable": true,
+      "signature": "SIG_pguRd1WfH1uecghamWae",
+      "account_name": "COMFORT FUNMILAYO IBITOYE",
+      "receiver_bank_account_number": null,
+      "receiver_bank": null
+    },
+    "customer": {
+      "id": 287960311,
+      "first_name": "",
+      "last_name": "",
+      "email": "michaelibitoye.acad@gmail.com",
+      "customer_code": "CUS_x8rp7j0nq0sticp",
+      "phone": "",
+      "metadata": null,
+      "risk_action": "default",
+      "international_format_phone": null
+    },
+    "plan": {},
+    "subaccount": {},
+    "split": {},
+    "order_id": null,
+    "paidAt": "2025-06-28T14:48:51.000Z",
+    "requested_amount": 10000,
+    "pos_transaction_data": null,
+    "source": {
+      "type": "web",
+      "source": "checkout",
+      "entry_point": "request_inline",
+      "identifier": null
+    }
+  }
+}
