@@ -39,7 +39,7 @@ export async function POST(req) {
   /* ----------------------------------------------------------------*/
   await dbConnect();
   const body = await req.json();
-  console.log(body);
+
   const {
     shortlet: shortletId,
     user,

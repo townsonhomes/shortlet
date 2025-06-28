@@ -89,16 +89,20 @@ export default function RecentReservationsTable({ bookings }) {
   }, [bookings, searchQuery, statusFilter, checkInDate, checkOutDate]);
 
   return (
-    <div className="bg-white shadow rounded-lg overflow-hidden">
-      <div className="px-6 py-4 border-b border-gray-100 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-        <h2 className="text-lg font-semibold text-gray-700">Bookings</h2>
-        <div className="flex flex-col items-center justify-center lg:flex-row gap-4 w-full lg:w-auto overflow-visible">
-          <SearchBar
-            value={searchQuery}
-            onChange={setSearchQuery}
-            placeholder="Search Customer Name"
-          />
-          <StatusFilter value={statusFilter} onChange={setStatusFilter} />
+    <div className="bg-white shadow rounded-lg overflow-hidden max-w-full">
+      <h2 className="text-lg font-semibold text-gray-700 px-6 py-2 pt-6 ">
+        Bookings
+      </h2>
+      <div className="px-6 py-2 pt-0  border-b border-gray-100 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+        <div className="flex items-end max-sm:flex-col max-sm:items-start mt-2 gap-4 w-full lg:w-auto overflow-visible">
+          <div className="flex flex-col gap-3">
+            <SearchBar
+              value={searchQuery}
+              onChange={setSearchQuery}
+              placeholder="Search Customer Name"
+            />
+            <StatusFilter value={statusFilter} onChange={setStatusFilter} />
+          </div>
           <SimpleDateFilters
             checkIn={checkInDate}
             checkOut={checkOutDate}
