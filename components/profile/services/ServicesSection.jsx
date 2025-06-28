@@ -45,11 +45,11 @@ export default function UserServicesSection({ services, user }) {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ reference: response.reference }),
-          });
+          }).then((r) => r.json());
 
-          const verifyData = await verifyRes.json();
+          //const verifyData = await verifyRes.json();
 
-          if (verifyData.status === "success") {
+          if (verifyRes.status === "success") {
             toast.success(
               "Payment verified! Your booking will be confirmed shortly."
             );

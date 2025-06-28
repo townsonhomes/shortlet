@@ -17,7 +17,7 @@ export default async function queueBackgroundWork(raw) {
 
     /* 3️⃣  POST to internal /mark-paid route */
     const res = await fetch(`${BASE_URL}/api/admin/service/mark-paid`, {
-      method: "POST",
+      method: "PUT",
       headers: {
         "Content-Type": "application/json",
         "x-internal-secret": INTERNAL_SECRET,
