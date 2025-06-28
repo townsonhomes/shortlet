@@ -117,7 +117,7 @@ function BookingPage() {
 
             if (verify.status === "success") {
               toast.success(
-                "Payment verified! Your booking will be confirmed shortly."
+                "Payment verified! Your order will be confirmed shortly."
               );
               router.push("/profile");
             } else {

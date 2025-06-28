@@ -1,6 +1,7 @@
 import crypto from "crypto";
 import { NextResponse } from "next/server";
 import bookingBackgroundWork from "../booking";
+import serviceBackgroundWork from "../service";
 
 const PAYSTACK_SECRET = process.env.PAYSTACK_SECRET_KEY;
 
@@ -23,6 +24,8 @@ export async function POST(req) {
 
   if (event.data.metadata.reason === "booking") {
     bookingBackgroundWork(rawBody);
+  } else if (event.data.metadata.reason === "service") {
+    serviceBackgroundWork(rawBody);
   }
   // fire and forget
   return NextResponse.json({ received: true }, { status: 200 });

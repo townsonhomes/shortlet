@@ -5,9 +5,23 @@ import User from "@/models/User";
 import { sendEmail } from "@/lib/email/sendEmail";
 import Notification from "@/models/Notification";
 
-const PAYSTACK_SECRET_KEY = process.env.PAYSTACK_SECRET_KEY;
+const INTERNAL_SECRET = process.env.INTERNAL_WEBHOOK_SECRET;
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 export async function PUT(req) {
+  const secretHeader = req.headers.get("x-internal-secret");
+
+  // If the request comes from the webhook, the header **must** match
+  if (secretHeader) {
+    if (secretHeader !== INTERNAL_SECRET) {
+      return NextResponse.json(
+        { error: "Forbidden (invalid internal secret)" },
+        { status: 403 }
+      );
+    }
+    // continue… (webhook is authorised)
+  }
+
   try {
     await dbConnect();
     const { serviceId, reference } = await req.json();
@@ -24,32 +38,6 @@ export async function PUT(req) {
     if (!existing) {
       return NextResponse.json({ error: "Service not found" }, { status: 404 });
     }
-    if (existing.paymentStatus === "paid") {
-      return NextResponse.json(
-        { error: "Service already marked as paid" },
-        { status: 400 }
-      );
-    }
-
-    // 2️⃣ Re-verify with Paystack
-    const verifyRes = await fetch(
-      `https://api.paystack.co/transaction/verify/${reference}`,
-      {
-        headers: {
-          Authorization: `Bearer ${PAYSTACK_SECRET_KEY}`,
-          "Content-Type": "application/json",
-        },
-      }
-    );
-
-    const verifyData = await verifyRes.json();
-
-    if (!verifyData.status || verifyData.data.status !== "success") {
-      return NextResponse.json(
-        { error: "Transaction verification failed" },
-        { status: 400 }
-      );
-    }
 
     // 4️⃣ Update the service record
     existing.paymentStatus = "paid";
@@ -59,19 +47,41 @@ export async function PUT(req) {
     // 5️⃣ Send confirmation email
     const user = await User.findById(existing.user);
     const html = `
-      <div style="font-family: sans-serif; line-height: 1.6">
-        <p>Hi <strong>${user.name || "Guest"}</strong>,</p>
-        <p>Your payment for the following service has been confirmed:</p>
-        <ul>
-          <li><strong>Description:</strong> ${existing.description}</li>
-          <li><strong>Amount:</strong> ₦${existing.price.toLocaleString()}</li>
-          <li><strong>Status:</strong> Paid</li>
-        </ul>
-        <p>You will receive an official receipt from Paystack via email shortly.</p>
-        <br/>
-        <p>Thanks for using our service.<br/>Townson Homes Admin</p>
-      </div>
-    `;
+  <div style="font-family: 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: auto; padding: 20px; background-color: #f9f9f9; color: #333; border-radius: 8px;">
+    <h2 style="color: #222;">Hello <span style="color: #f59e0b;">${
+      user.name || "Guest"
+    }</span>,</h2>
+
+    <p style="font-size: 15px;">
+      We're pleased to inform you that your payment has been <strong style="color: green;">successfully confirmed</strong> for the following:
+    </p>
+
+    <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
+      <tr>
+        <td style="padding: 8px 0; font-weight: bold;">Description:</td>
+        <td style="padding: 8px 0;">${existing.description}</td>
+      </tr>
+      <tr>
+        <td style="padding: 8px 0; font-weight: bold;">Amount:</td>
+        <td style="padding: 8px 0;">₦${existing.price.toLocaleString()}</td>
+      </tr>
+      <tr>
+        <td style="padding: 8px 0; font-weight: bold;">Status:</td>
+        <td style="padding: 8px 0; color: green;"><strong>Paid</strong></td>
+      </tr>
+    </table>
+
+    <p style="font-size: 14px;">
+      You will also receive an official receipt directly from Paystack via email.
+    </p>
+
+    <p style="margin-top: 30px; font-size: 14px;">
+      Thank you for choosing <strong>Townson Homes</strong>.<br/>
+      <span style="color: #999;">— Admin Team</span>
+    </p>
+  </div>
+`;
+
     await sendEmail({
       to: user.email,
       subject: "Service Payment Confirmed",

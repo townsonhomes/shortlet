@@ -28,7 +28,10 @@ const PUBLIC_PATHS = [
 ];
 
 // 👇 Routes that support internal secret (e.g. webhook → /api/bookings/addBooking)
-const INTERNAL_SECRET_PATHS = ["/api/bookings/addBooking"];
+const INTERNAL_SECRET_PATHS = [
+  "/api/bookings/addBooking",
+  "/api/admin/service/mark-paid",
+];
 
 export async function middleware(req) {
   const { pathname } = req.nextUrl;

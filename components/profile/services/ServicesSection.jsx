@@ -34,6 +34,7 @@ export default function UserServicesSection({ services, user }) {
       email: user.email,
       amount: service.price, // in kobo already?
       metadata: {
+        reason: "service",
         userId: user._id,
         serviceId: service._id,
       },
@@ -49,24 +50,10 @@ export default function UserServicesSection({ services, user }) {
           const verifyData = await verifyRes.json();
 
           if (verifyData.status === "success") {
-            // 2. Update service record
-            const updateRes = await fetch("/api/admin/service/mark-paid", {
-              method: "PUT",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({
-                reference: response.reference,
-                serviceId: service._id,
-              }),
-            });
-
-            const updateData = await updateRes.json();
-
-            if (!updateRes.ok) {
-              throw new Error(updateData.error || "Failed to update service");
-            }
-
-            toast.success("Payment successful");
-            window.location.reload();
+            toast.success(
+              "Payment verified! Your booking will be confirmed shortly."
+            );
+            router.push("/profile");
           } else {
             toast.error("Payment verification failed");
           }
