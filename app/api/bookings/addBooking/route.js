@@ -39,7 +39,7 @@ export async function POST(req) {
   /* ----------------------------------------------------------------*/
   await dbConnect();
   const body = await req.json();
-
+  console.log(body);
   const {
     shortlet: shortletId,
     user,
@@ -54,13 +54,14 @@ export async function POST(req) {
     verifiedAt,
   } = body;
 
-  // Prevent duplicate reference
-  const dup = await Booking.findOne({ paymentReference });
-  if (dup) {
-    return NextResponse.json(
-      { error: "Booking with this reference already exists." },
-      { status: 409 }
-    );
+  if (paymentReference) {
+    const dup = await Booking.findOne({ paymentReference });
+    if (dup) {
+      return NextResponse.json(
+        { error: "Booking with this reference already exists." },
+        { status: 409 }
+      );
+    }
   }
 
   // Create booking

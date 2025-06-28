@@ -92,7 +92,7 @@ export default function RecentReservationsTable({ bookings }) {
     <div className="bg-white shadow rounded-lg overflow-hidden">
       <div className="px-6 py-4 border-b border-gray-100 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
         <h2 className="text-lg font-semibold text-gray-700">Bookings</h2>
-        <div className="flex flex-col items-end justify-center md:flex-row gap-4 w-full md:w-auto overflow-visible">
+        <div className="flex flex-col items-center justify-center lg:flex-row gap-4 w-full lg:w-auto overflow-visible">
           <SearchBar
             value={searchQuery}
             onChange={setSearchQuery}

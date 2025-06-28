@@ -1,10 +1,11 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import RoomCard from "@/components/RoomCard";
 import SearchCard from "@/components/searchCard";
 import { useBooking } from "@/context/BookingContext";
+import Loader from "@/components/Loader";
 
 export default function SearchResultsContent() {
   const searchParams = useSearchParams();
@@ -65,12 +66,20 @@ export default function SearchResultsContent() {
       </section>
       <SearchCard className="hidden max-md:block max-md:static max-md:mx-auto max-sm:mb-4 mb-8 max-md:mt-8" />
       <div className="px-4 md:px-16 pt-[8%] sm:pt-[14%] sm:min-h-[30vh] lg:pt-[8%] lg:min-h-[70vh]">
-        <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
-          {results.map((room, index) => (
-            <RoomCard key={index} room={room} />
-          ))}
-        </div>
+        <CardList results={results} />
       </div>
     </main>
+  );
+}
+
+function CardList({ results }) {
+  return (
+    <Suspense fallback={<Loader />}>
+      <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
+        {results.map((room, index) => (
+          <RoomCard key={index} room={room} />
+        ))}
+      </div>
+    </Suspense>
   );
 }
