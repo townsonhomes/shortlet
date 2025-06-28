@@ -43,6 +43,7 @@ export async function POST(req) {
   const {
     shortlet: shortletId,
     name,
+    email,
     user,
     checkInDate,
     checkOutDate,

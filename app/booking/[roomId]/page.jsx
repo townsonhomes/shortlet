@@ -100,6 +100,7 @@ function BookingPage() {
         amount: total, // Paystack expects kobo if NGN – multiply by 100 if needed
         metadata: {
           pendingId,
+          reason: "booking",
           name,
           roomId,
           checkInDate,
