@@ -1,6 +1,7 @@
 import dbConnect from "@/lib/dbConnect";
 import BookingPending from "@/models/BookingPending";
-
+const INTERNAL_SECRET = process.env.INTERNAL_WEBHOOK_SECRET;
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 export default async function queueBackgroundWork(raw) {
   try {
     const event = JSON.parse(raw);

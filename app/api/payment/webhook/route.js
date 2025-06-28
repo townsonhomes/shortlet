@@ -3,8 +3,6 @@ import { NextResponse } from "next/server";
 import bookingBackgroundWork from "../booking";
 
 const PAYSTACK_SECRET = process.env.PAYSTACK_SECRET_KEY;
-const INTERNAL_SECRET = process.env.INTERNAL_WEBHOOK_SECRET;
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 export async function POST(req) {
   /* ───────────── 1. Read raw body – don’t JSON.parse yet ───────────── */
