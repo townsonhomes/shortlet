@@ -14,7 +14,7 @@ import BookingPending from "@/models/BookingPending";
 export async function POST(req) {
   // 1️⃣  — read raw body (important: DO NOT parse first)
   const rawBody = await req.text();
-
+  console.log("raw body", rawBody);
   // 2️⃣  — verify signature
   const secret = process.env.PAYSTACK_SECRET_KEY;
   const hash = crypto
