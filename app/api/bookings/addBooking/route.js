@@ -6,7 +6,7 @@ import Notification from "@/models/Notification";
 import Shortlet from "@/models/Shortlet";
 
 const INTERNAL_SECRET = process.env.INTERNAL_WEBHOOK_SECRET;
-
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 /* ------------------------------------------------------------------ */
 /*  POST /api/bookings/addBooking                                     */
 /* ------------------------------------------------------------------ */
@@ -92,7 +92,7 @@ export async function POST(req) {
   });
   await shortlet.save();
 
-  const res = await fetch("/api/emails/sendAPI", {
+  const res = await fetch(`${BASE_URL}/api/emails/sendAPI`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
