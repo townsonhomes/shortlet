@@ -48,7 +48,7 @@ export default function UserServicesSection({ services, user }) {
           }).then((r) => r.json());
 
           //const verifyData = await verifyRes.json();
-
+          console.log(verifyRes);
           if (verifyRes.status === "success") {
             toast.success(
               "Payment verified! Your booking will be confirmed shortly."
