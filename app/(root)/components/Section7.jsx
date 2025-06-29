@@ -13,7 +13,7 @@ const Section7 = () => {
           Lorem ipsum dolor sit amet consectetur. Semper gravida a volutpat
           egestas risus scelerisque amet.
         </p>
-        <Link href="/Partner">
+        <Link href="/contact-us">
           <button className="w-max rounded-md bg-neutral-900 text-white text-sm font-medium px-8 py-3 hover:bg-neutral-700 transition">
             List your Property
           </button>

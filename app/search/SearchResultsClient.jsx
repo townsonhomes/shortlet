@@ -1,5 +1,6 @@
 "use client";
 
+import RoomCardSkeleton from "@/components/RoomCardSkeleton";
 import { useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useState } from "react";
 import RoomCard from "@/components/RoomCard";
@@ -8,6 +9,8 @@ import { useBooking } from "@/context/BookingContext";
 import Loader from "@/components/Loader";
 
 export default function SearchResultsContent() {
+  const [loading, setLoading] = useState(true);
+
   const searchParams = useSearchParams();
   const category = searchParams.get("category");
   const checkInDate = searchParams.get("checkInDate");
@@ -22,6 +25,7 @@ export default function SearchResultsContent() {
     setBookingDates({ checkInDate: checkIn, checkOutDate: checkOut });
 
     async function fetchResults() {
+      setLoading(true);
       try {
         const params = new URLSearchParams();
 
@@ -37,6 +41,8 @@ export default function SearchResultsContent() {
         setResults(data);
       } catch (error) {
         console.error("Failed to fetch search results", error);
+      } finally {
+        setLoading(false);
       }
     }
 
@@ -66,19 +72,20 @@ export default function SearchResultsContent() {
       </section>
       <SearchCard className="hidden max-md:block max-md:static max-md:mx-auto max-sm:mb-4 mb-8 max-md:mt-8" />
       <div className="px-4 md:px-16 pt-[8%] sm:pt-[14%] sm:min-h-[30vh] lg:pt-[8%] lg:min-h-[70vh]">
-        <CardList results={results} />
+        <CardList results={results} loading={loading} />
       </div>
     </main>
   );
 }
 
-function CardList({ results }) {
+function CardList({ results, loading }) {
+  const skeletonArray = Array(3).fill(0);
   return (
     <Suspense fallback={<Loader />}>
       <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
-        {results.map((room, index) => (
-          <RoomCard key={index} room={room} />
-        ))}
+        {loading
+          ? skeletonArray.map((_, index) => <RoomCardSkeleton key={index} />)
+          : results.map((room, index) => <RoomCard key={index} room={room} />)}
       </div>
     </Suspense>
   );

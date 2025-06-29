@@ -47,8 +47,6 @@ export default function UserServicesSection({ services, user }) {
             body: JSON.stringify({ reference: response.reference }),
           }).then((r) => r.json());
 
-          //const verifyData = await verifyRes.json();
-          console.log(verifyRes);
           if (verifyRes.status === "success") {
             toast.success(
               "Payment verified! Your booking will be confirmed shortly."
@@ -59,7 +57,7 @@ export default function UserServicesSection({ services, user }) {
           }
         } catch (err) {
           console.error(err);
-          toast.error("Error verifying transaction");
+          //toast.error("Error verifying transaction");
         }
       },
       onClose: () => toast.error("Payment closed"),

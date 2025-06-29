@@ -32,7 +32,6 @@ export default async function ProfilePage() {
   ]);
 
   const book = JSON.parse(JSON.stringify(bookings));
-  //console.log(services);
   return (
     <Suspense fallback={<Loader />}>
       <ProfileLayout

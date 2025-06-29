@@ -12,7 +12,6 @@ export async function POST(req) {
   connectToDatabase();
 
   const { name, lastName, email, password, phone } = await req.json();
-  console.log(phone);
   if (!name || !lastName || !email || !password || !phone) {
     return Response.json({ error: "All fields are required" }, { status: 400 });
   }

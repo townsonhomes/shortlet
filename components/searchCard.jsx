@@ -17,6 +17,7 @@ const SearchCard = ({ className }) => {
   const [shortletType, setShortletType] = useState("");
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [categories, setCategories] = useState(["All"]);
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
 
   const dropdownRef = useRef();
@@ -53,69 +54,79 @@ const SearchCard = ({ className }) => {
   }, []);
 
   const handleSearch = () => {
-    const hasCategory = !!shortletType;
-    const hasCheckIn = !!checkInDate;
-    const hasCheckOut = !!checkOutDate;
-    const isAllCategory = shortletType === "All";
+    setLoading(true);
+    try {
+      const hasCategory = !!shortletType;
+      const hasCheckIn = !!checkInDate;
+      const hasCheckOut = !!checkOutDate;
+      const isAllCategory = shortletType === "All";
 
-    if (hasCheckIn && hasCheckOut) {
-      if (
-        format(checkInDate, "yyyy-MM-dd") === format(checkOutDate, "yyyy-MM-dd")
-      ) {
-        return toast.error("Check-in and check-out cannot be the same day.", {
-          style: {
-            background: "#fef2f2",
-            color: "#991b1b",
-            fontWeight: "600",
-            border: "1px solid #fecaca",
-          },
-        });
+      if (hasCheckIn && hasCheckOut) {
+        if (
+          format(checkInDate, "yyyy-MM-dd") ===
+          format(checkOutDate, "yyyy-MM-dd")
+        ) {
+          toast.error("Check-in and check-out cannot be the same day.", {
+            style: {
+              background: "#fef2f2",
+              color: "#991b1b",
+              fontWeight: "600",
+              border: "1px solid #fecaca",
+            },
+          });
+          return setLoading(false);
+        }
+
+        if (checkOutDate < checkInDate) {
+          toast.error("Check-out cannot be before check-in.", {
+            style: {
+              background: "#fef2f2",
+              color: "#991b1b",
+              fontWeight: "600",
+              border: "1px solid #fecaca",
+            },
+          });
+          return setLoading(false);
+        }
+
+        if (
+          format(checkInDate, "yyyy-MM-dd") <
+            format(new Date(), "yyyy-MM-dd") ||
+          format(checkInDate, "yyyy-MM-dd") < format(new Date(), "yyyy-MM-dd")
+        ) {
+          toast.error("Input Valid Dates", {
+            style: {
+              background: "#fef2f2",
+              color: "#991b1b",
+              fontWeight: "600",
+              border: "1px solid #fecaca",
+            },
+          });
+          return setLoading(false);
+        }
       }
 
-      if (checkOutDate < checkInDate) {
-        return toast.error("Check-out cannot be before check-in.", {
-          style: {
-            background: "#fef2f2",
-            color: "#991b1b",
-            fontWeight: "600",
-            border: "1px solid #fecaca",
-          },
-        });
+      if (!hasCategory && !hasCheckIn && !hasCheckOut) {
+        // allow showing all results
+        router.push(`/search`);
+        return;
       }
 
-      if (
-        format(checkInDate, "yyyy-MM-dd") < format(new Date(), "yyyy-MM-dd") ||
-        format(checkInDate, "yyyy-MM-dd") < format(new Date(), "yyyy-MM-dd")
-      ) {
-        return toast.error("Input Valid Dates", {
-          style: {
-            background: "#fef2f2",
-            color: "#991b1b",
-            fontWeight: "600",
-            border: "1px solid #fecaca",
-          },
-        });
+      const params = new URLSearchParams();
+      if (shortletType && shortletType !== "All") {
+        params.set("category", shortletType);
       }
+      if (hasCheckIn)
+        params.set("checkInDate", format(checkInDate, "yyyy-MM-dd"));
+      if (hasCheckOut)
+        params.set("checkOutDate", format(checkOutDate, "yyyy-MM-dd"));
+      if (!isAllCategory) {
+        params.set("category", shortletType);
+      }
+      router.push(`/search?${params.toString()}`);
+    } finally {
+      setTimeout(() => setLoading(false), 800); // small delay for UX polish
     }
-
-    if (!hasCategory && !hasCheckIn && !hasCheckOut) {
-      // allow showing all results
-      router.push(`/search`);
-      return;
-    }
-
-    const params = new URLSearchParams();
-    if (shortletType && shortletType !== "All") {
-      params.set("category", shortletType);
-    }
-    if (hasCheckIn)
-      params.set("checkInDate", format(checkInDate, "yyyy-MM-dd"));
-    if (hasCheckOut)
-      params.set("checkOutDate", format(checkOutDate, "yyyy-MM-dd"));
-    if (!isAllCategory) {
-      params.set("category", shortletType);
-    }
-    router.push(`/search?${params.toString()}`);
   };
 
   return (
@@ -234,7 +245,15 @@ const SearchCard = ({ className }) => {
           onClick={handleSearch}
           className="bg-gray-900 text-white px-6 py-3 rounded-md flex items-center gap-2 w-full md:w-auto justify-center text-sm hover:bg-gray-800 transition"
         >
-          <FaSearch /> Search
+          {loading ? (
+            <>
+              <Loader2 className="animate-spin h-4 w-4" />
+            </>
+          ) : (
+            <>
+              <FaSearch /> Search
+            </>
+          )}
         </button>
       </div>
     </div>
