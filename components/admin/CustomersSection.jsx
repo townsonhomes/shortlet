@@ -5,11 +5,15 @@ import { Mail } from "lucide-react";
 import SearchBar from "../SearchBar";
 import MessageModal from "@/components/admin/MessageModal";
 import toast from "react-hot-toast";
+import Image from "next/image";
+import ImagePreviewModal from "@/components/ImagePreviewModal";
 
 export default function GuestsTable({ users }) {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedUser, setSelectedUser] = useState(null);
   const [isMessageOpen, setIsMessageOpen] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [imageURL, setImageURL] = useState("");
 
   const filteredUsers = useMemo(() => {
     const q = searchQuery.toLowerCase();
@@ -44,43 +48,70 @@ export default function GuestsTable({ users }) {
               <th className="px-4 py-3 text-left">Gender</th>
               <th className="px-4 py-3 text-left">Nationality</th>
               <th className="px-4 py-3 text-left">Address</th>
-              <th className="px-4 py-3 text-left">Verified</th>
+              <th className="px-4 py-3 text-left">Identity</th>
+              <th className="px-4 py-3 text-left">ID image</th>
               <th className="px-4 py-3 text-left">Actions</th>
             </tr>
           </thead>
           <tbody className="divide-y text-gray-700">
             {filteredUsers.length > 0 ? (
-              filteredUsers.map((user, i) => (
-                <tr key={user._id} className="hover:bg-gray-50 transition">
-                  <td className="px-4 py-3">{i + 1}</td>
-                  <td className="px-4 py-3 font-medium">{user.name}</td>
-                  <td className="px-4 py-3">{user.email}</td>
-                  <td className="px-4 py-3">{user.phone || "-"}</td>
-                  <td className="px-4 py-3 capitalize">{user.gender || "-"}</td>
-                  <td className="px-4 py-3">{user.nationality || "-"}</td>
-                  <td className="px-4 py-3">{user.address || "-"}</td>
-                  <td className="px-4 py-3">
-                    <span
-                      className={`px-2 py-1 rounded text-xs font-medium ${
-                        user.isEmailVerified
-                          ? "bg-green-100 text-green-700"
-                          : "bg-red-100 text-red-700"
-                      }`}
-                    >
-                      {user.isEmailVerified ? "Verified" : "Not Verified"}
-                    </span>
-                  </td>
-                  <td className="px-4 py-3 flex gap-2">
-                    <button
-                      className="p-2 rounded-full hover:bg-yellow-100 text-yellow-600"
-                      title="Send Message"
-                      onClick={() => handleSendMessage(user)}
-                    >
-                      <Mail size={16} />
-                    </button>
-                  </td>
-                </tr>
-              ))
+              filteredUsers.map((user, i) => {
+                return (
+                  <tr key={user._id} className="hover:bg-gray-50 transition">
+                    <td className="px-4 py-3">{i + 1}</td>
+                    <td className="px-4 py-3 font-medium">{user.name}</td>
+                    <td className="px-4 py-3">{user.email}</td>
+                    <td className="px-4 py-3">{user.phone || "-"}</td>
+                    <td className="px-4 py-3 capitalize">
+                      {user.gender || "-"}
+                    </td>
+                    <td className="px-4 py-3">{user.nationality || "-"}</td>
+                    <td className="px-4 py-3">{user.address || "-"}</td>
+                    <td className="px-4 py-3">
+                      <span
+                        className={`px-2 py-1 rounded text-xs font-medium ${
+                          user.isIdVerified
+                            ? "bg-green-100 text-green-700"
+                            : "bg-red-100 text-red-700"
+                        }`}
+                      >
+                        {user.isIdVerified ? "Verified" : "Unverified"}
+                      </span>
+                    </td>
+                    <td className="px-4 py-3">
+                      {" "}
+                      <div
+                        className="relative w-15 h-8 cursor-pointer"
+                        onClick={() => {
+                          setImageURL(user.idImage);
+                          setModalOpen(true);
+                        }}
+                      >
+                        {user.idImage ? (
+                          <Image
+                            src={user.idImage}
+                            alt="ID Preview"
+                            layout="fill"
+                            objectFit="cover"
+                            className="rounded border"
+                          />
+                        ) : (
+                          <></>
+                        )}
+                      </div>
+                    </td>
+                    <td className="px-4 py-3 flex gap-2">
+                      <button
+                        className="p-2 rounded-full hover:bg-yellow-100 text-yellow-600"
+                        title="Send Message"
+                        onClick={() => handleSendMessage(user)}
+                      >
+                        <Mail size={16} />
+                      </button>
+                    </td>
+                  </tr>
+                );
+              })
             ) : (
               <tr>
                 <td
@@ -100,6 +131,12 @@ export default function GuestsTable({ users }) {
         user={selectedUser}
         onSend={handleSend}
       />
+      {modalOpen && (
+        <ImagePreviewModal
+          previewUrl={imageURL}
+          onClose={() => setModalOpen(false)}
+        />
+      )}
     </div>
   );
 

@@ -41,6 +41,18 @@ const UserSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    idType: {
+      type: String,
+      required: false,
+    },
+    idImage: {
+      type: String,
+      required: false,
+    },
+    isIdVerified: {
+      type: Boolean,
+      default: false,
+    },
   },
   { timestamps: true }
 );

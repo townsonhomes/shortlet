@@ -40,7 +40,11 @@ export default function Navbar() {
       href: "/about",
       icon: <FaInfoCircle className="md:hidden mr-3" />,
     },
-    // { label: "Blog", href: "#", icon: <FaBlog className="md:hidden mr-3" /> },
+    {
+      label: "Blog",
+      href: "https://towsonsgetaway.org/blog",
+      icon: <FaBlog className="md:hidden mr-3" />,
+    },
     {
       label: "Partnership",
       href: "/contact-us",

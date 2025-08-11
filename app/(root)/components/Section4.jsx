@@ -9,20 +9,19 @@ import Link from "next/link";
 const slides = [
   {
     title: "One Room and Parlour with Kitchen",
-    desc: "Lorem ipsum dolor sit amet consectetur. Semper gravida a volutpat egestas risus scelerisque amet.",
-    img: "/images/house-1.png", // replace with real images ➜ public/
+    desc: "Compact urban living with full kitchen - perfect for solo travelers or couples.",
+    img: "/images/house-1.png",
   },
   {
     title: "Two-Bedroom Luxury Suite",
-    desc: "Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae.",
-    img: "/images/house-1.png",
+    desc: "Spacious retreat with premium amenities for families or small groups.",
+    img: "/images/house1.png",
   },
   {
     title: "Modern Duplex Apartment",
-    desc: "Nunc facilisis, ligula id pretium mattis, elit sem tempus arcu, non feugiat diam metus non ligula.",
-    img: "/images/house-1.png",
+    desc: "Stylish two-level living with contemporary design and city views.",
+    img: "/images/house2.jpg",
   },
-  // add as many as you need…
 ];
 
 export default function ChoiceSlider() {
@@ -43,11 +42,11 @@ export default function ChoiceSlider() {
       {/* headline */}
       <div className="text-center mb-16 px-4">
         <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-neutral-900">
-          A World of <span className="text-amber-400">Choice</span>
+          A World of <span className="text-amber-400">Choices</span>
         </h2>
         <p className="mt-4 max-w-xl mx-auto text-gray-500 text-sm sm:text-base">
-          Lorem ipsum dolor sit amet consectetur. Semper gravida a volutpat
-          egestas risus scelerisque amet.
+          vetted premium, verified for trust, & curated aesthetic for appeal and
+          comfort.
         </p>
       </div>
       <div className="px-[5%]">

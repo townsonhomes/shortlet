@@ -16,19 +16,19 @@ import {
 const contactDetails = [
   {
     icon: <FaMapMarkerAlt className="text-[#C4C4C4]" />,
-    text: "contact@company.com",
+    text: "Abuja, Nigeria.",
   },
   {
     icon: <FaPhoneAlt className="text-[#C4C4C4]" />,
-    text: "+243 902 666 2395",
+    text: "+243 7082813571",
   },
   {
     icon: <FaWhatsapp className="text-[#C4C4C4]" />,
-    text: "+234 913 563 1165",
+    text: "+234 7082813571",
   },
   {
     icon: <FaEnvelope className="text-[#C4C4C4]" />,
-    text: "support@hotelmangrove.com",
+    text: "towsonhomes92@gmail.com",
   },
 ];
 
@@ -36,15 +36,24 @@ const menuLinks = [
   { name: "Home", link: "/" },
   { name: "Short-Lets", link: "/search" },
   { name: "About Us", link: "/about" },
-  { name: "Contact Us", link: "/contact-us" },
+  { name: "Blog", link: "https://towsonsgetaway.org/blog" },
+  { name: "Partnership", link: "/contact-us" },
 ];
 
 const socialContacts = [
-  { icon: <FaFacebookF className="text-[#C4C4C4]" />, text: "Facebook" },
-  { icon: <FaTwitter className="text-[#C4C4C4]" />, text: "Twitter" },
-  { icon: <FaInstagram className="text-[#C4C4C4]" />, text: "Instagram" },
-  { icon: <FaLinkedinIn className="text-[#C4C4C4]" />, text: "LinkedIn" },
-  { icon: <FaYoutube className="text-[#C4C4C4]" />, text: "YouTube" },
+  // { icon: <FaFacebookF className="text-[#C4C4C4]" />, text: "Facebook" , link: "https://facebook.com" },
+  {
+    icon: <FaTwitter className="text-[#C4C4C4]" />,
+    text: "Twitter",
+    link: "https://x.com/towson_homes?s=21",
+  },
+  {
+    icon: <FaInstagram className="text-[#C4C4C4]" />,
+    text: "Instagram",
+    link: "https://www.instagram.com/towsonhomes?igsh=ZnZobm15aXJjbDJs&utm_source=qr",
+  },
+  // { icon: <FaLinkedinIn className="text-[#C4C4C4]" />, text: "LinkedIn" , link: "https://linkedin.com" },
+  // { icon: <FaYoutube className="text-[#C4C4C4]" />, text: "YouTube" , link: "https://youtube.com" },
 ];
 
 export default function Footer() {
@@ -86,7 +95,7 @@ export default function Footer() {
           <h4 className="text-[#f5c252] font-semibold mb-4">Contacts us</h4>
           <ul className="space-y-3 text-sm">
             {contactDetails.map(({ icon, text }) => (
-              <li key={text} className="flex items-center gap-2">
+              <li key={text} className="flex items-center gap-2 cursor-default">
                 {icon}
                 {text}
               </li>
@@ -98,10 +107,12 @@ export default function Footer() {
         <div>
           <h4 className="text-[#f5c252] font-semibold mb-4">Stay up to date</h4>
           <ul className="space-y-3 text-sm">
-            {socialContacts.map(({ icon, text }) => (
+            {socialContacts.map(({ icon, text, link }) => (
               <li key={text} className="flex items-center gap-2">
-                {icon}
-                {text}
+                <Link href={link} className="flex items-center gap-2">
+                  {icon}
+                  {text}
+                </Link>
               </li>
             ))}
           </ul>

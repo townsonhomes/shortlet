@@ -18,6 +18,7 @@ export async function PATCH(req, context) {
         images: body.images,
         pricePerDay: body.pricePerDay,
         amenities: body.amenities,
+        ownership: body.ownership,
       },
       { new: true, runValidators: true }
     );

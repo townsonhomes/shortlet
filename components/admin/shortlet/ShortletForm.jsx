@@ -1,4 +1,3 @@
-// app/components/ShortletForm.jsx
 "use client";
 
 import { useEffect, useState } from "react";
@@ -11,6 +10,7 @@ import {
   Loader2,
   Trash,
 } from "lucide-react";
+import { ChevronUpDownIcon } from "@heroicons/react/20/solid";
 
 export default function ShortletForm({ shortlet, onClose, onRefresh }) {
   const [localImages, setLocalImages] = useState([]);
@@ -19,6 +19,11 @@ export default function ShortletForm({ shortlet, onClose, onRefresh }) {
   const [loading, setLoading] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [imageError, setImageError] = useState("");
+  const [owners, setOwners] = useState([]);
+  const [selectedOwner, setSelectedOwner] = useState("");
+  const [customOwnership, setCustomOwnership] = useState("");
+  const [ownershipError, setOwnershipError] = useState("");
+  const [showOwnerList, setShowOwnerList] = useState(false);
 
   const {
     register,
@@ -63,6 +68,23 @@ export default function ShortletForm({ shortlet, onClose, onRefresh }) {
     }
   }, [shortlet, reset]);
 
+  useEffect(() => {
+    const fetchOwners = async () => {
+      try {
+        const res = await fetch("/api/admin/shortlets/owners");
+        const data = await res.json();
+        const all = Array.isArray(data)
+          ? ["Townson Homes", ...data.filter((o) => o !== "Townson Homes")]
+          : ["Townson Homes"];
+        setOwners([...new Set(all)]);
+      } catch (err) {
+        console.error("Failed to fetch owners:", err);
+      }
+    };
+
+    fetchOwners();
+  }, []);
+
   const handleImageChange = (e) => {
     const files = Array.from(e.target.files);
     if (files.length) {
@@ -74,6 +96,16 @@ export default function ShortletForm({ shortlet, onClose, onRefresh }) {
   const onSubmit = async (data) => {
     setLoading(true);
     setStatus(null);
+
+    // Ownership validation
+    const finalOwnership =
+      selectedOwner === "New" ? customOwnership.trim() : selectedOwner;
+
+    if (!finalOwnership) {
+      setOwnershipError("Ownership must be set");
+      setLoading(false);
+      return;
+    }
 
     try {
       let uploadedUrls = cloudinaryUrls;
@@ -103,7 +135,7 @@ export default function ShortletForm({ shortlet, onClose, onRefresh }) {
         const formData = new FormData();
         localImages.forEach((file) => formData.append("images", file));
 
-        const res = await fetch("/api/upload", {
+        const res = await fetch("/api/upload-shortlet", {
           method: "POST",
           body: formData,
         });
@@ -119,6 +151,7 @@ export default function ShortletForm({ shortlet, onClose, onRefresh }) {
 
       const payload = {
         ...data,
+        ownership: finalOwnership,
         pricePerDay: Number(data.pricePerDay),
         images: uploadedUrls,
       };
@@ -149,7 +182,7 @@ export default function ShortletForm({ shortlet, onClose, onRefresh }) {
   };
 
   return (
-    <div className="fixed px-[5%] inset-0 z-50 bg-black/40 backdrop-blur-sm flex justify-center items-start pt-20 overflow-y-auto">
+    <div className="fixed px-[5%] inset-0 z-50 bg-black/40 backdrop-blur-sm flex justify-center items-start py-20 overflow-y-auto">
       <div className="bg-white w-full max-w-2xl rounded-xl shadow-lg p-6 relative space-y-4 animate-fadeIn">
         <button
           onClick={onClose}
@@ -189,6 +222,72 @@ export default function ShortletForm({ shortlet, onClose, onRefresh }) {
             className="w-full px-4 py-2 border rounded-lg"
             rows={3}
           />
+          {/* Ownership Dropdown */}
+          <div>
+            <label className="text-sm font-medium">Ownership</label>
+            <div className="relative">
+              <div
+                className="w-full border rounded-lg px-4 py-2 cursor-pointer bg-white flex justify-between items-center"
+                onClick={() => setShowOwnerList((prev) => !prev)}
+              >
+                <span
+                  className={
+                    selectedOwner ? "text-gray-800" : "text-gray-400 italic"
+                  }
+                >
+                  {selectedOwner
+                    ? selectedOwner
+                    : shortlet?.ownership || "Select owner"}
+                </span>
+                <ChevronUpDownIcon className="w-4 h-4 text-gray-500" />
+              </div>
+
+              {showOwnerList && (
+                <div className="absolute z-10 mt-1 bg-white border rounded-lg shadow w-full max-h-40 overflow-y-auto">
+                  {owners.map((owner, i) => (
+                    <div
+                      key={i}
+                      onClick={() => {
+                        setSelectedOwner(owner);
+                        setShowOwnerList(false);
+                        setOwnershipError("");
+                      }}
+                      className={`px-4 py-2 cursor-pointer hover:bg-gray-100 ${
+                        selectedOwner === owner ? "bg-gray-100" : ""
+                      }`}
+                    >
+                      {owner}
+                    </div>
+                  ))}
+                  <div
+                    onClick={() => {
+                      setSelectedOwner("New");
+                      setShowOwnerList(false);
+                      setOwnershipError("");
+                    }}
+                    className={`px-4 py-2 cursor-pointer hover:bg-gray-100 ${
+                      selectedOwner === "New" ? "bg-gray-100" : ""
+                    }`}
+                  >
+                    + New
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {selectedOwner === "New" && (
+              <input
+                value={customOwnership}
+                onChange={(e) => setCustomOwnership(e.target.value)}
+                placeholder="Enter new ownership"
+                className="mt-2 w-full px-4 py-2 border rounded-lg"
+              />
+            )}
+
+            {ownershipError && (
+              <p className="text-sm text-red-500 mt-1">{ownershipError}</p>
+            )}
+          </div>
 
           <input
             {...register("location")}

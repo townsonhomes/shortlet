@@ -12,6 +12,11 @@ const ShortletSchema = new mongoose.Schema(
       type: String,
       required: false,
     },
+    ownership: {
+      type: String,
+      required: true,
+      trim: true,
+    },
     location: {
       type: String,
       required: false, // optional

@@ -13,11 +13,21 @@ import {
 } from "react-icons/fa";
 
 const list1 = [
-  "Sapien mauris at in elementum arcu in sapien dui ac. Venenatis neque dignissim lectus aliquet.",
-  "Sapien mauris at in elementum arcu in sapien dui lectus aliquet .",
-  "Sapien mauris at in elementum arcu in sapien dui ac. Venenatis neque nissi",
-  "Sapien mauris at in elementum arcu in sapien dui ac. Venenatis",
-  "Sapien mauris at in elementum arcu in sapien dui ac. Venenatis neque dignissim lectus aliquet.",
+  "Provide a comfortable stay",
+  "Offer convenience to our guests",
+  "Ensure affordability",
+  "Make our guests feel at home",
+  "Deliver a hassle-free experience in the heart of Abuja.",
+];
+
+const list2 = [
+  "Flexibility: Our Short-term rentals provide flexibility for travelers, business professionals, or individuals with temporary work assignments.",
+  "Convenience: Furnished apartments with amenities like Wi-Fi, laundry, and kitchen facilities offer a convenient living solution.",
+  "Comfort: Our Short-let apartments provide a home away from home, allowing guests to relax and feel comfortable during their stay.",
+  "Cost-effectiveness: Our Short-term rentals can be more cost-effective than hotels, especially for longer stays or group bookings",
+  "Local experience: At Towson Homes Short-let apartments often provide a more authentic local experience, allowing guests to immerse themselves in the community.",
+  "Space: Our Apartments typically offer more space than hotel rooms, making it  ideal for families, groups, or individuals needing room to work or relax.",
+  "Amenities: Our short-let apartments come with amenities like gym access, Tour guide, or parking, enhancing the overall stay experience.",
 ];
 
 const steps = [
@@ -56,30 +66,23 @@ const page = () => {
       </section>
       <section className="w-[85%] max-sm:w-[90%] -mt-30 relative z-30 bg-white mx-auto rounded-[15px] px-[4%] py-15 shadow-lg max-sm:py-8">
         <Image
-          src="/images/shortlet.png"
+          src="/images/house2.jpg"
           alt="icon"
           width={500}
           height={500}
           className="object-cover rounded-[12px] w-full h-[300px] max-sm:hidden"
         />
         <p className="mt-8 text-sm text-[#303030] max-sm:mt-0">
-          Lorem ipsum dolor sit amet consectetur. Sapien mauris at in elementum
-          arcu in sapien dui ac. Venenatis neque dignissim lectus aliquet sed
-          nisl. Imperdiet at tristique id integer fringilla nisi pretium vitae
-          vulputate. Eu ut semper pharetra libero pharetra. Dignissim vitae quam
-          elementum quis facilisis mattis enim. Eu etiam morbi enim ullamcorper
-          sed nibh consectetur. Sodales velit sit enim nam nulla. Leo interdum
-          urna morbi id justo. Morbi laoreet amet volutpat scelerisque. Tortor
-          in turpis integer leo id in varius. Sed arcu arcu mattis sapien
-          curabitur fringilla in tristique quam. Lacinia mauris ultricies
-          pharetra porta lectus purus placerat fringilla. Volutpat in volutpat
-          ut eu tincidunt. Et libero ultricies vitae sapien tempor scelerisque
-          dictum mauris. Nisl faucibus pretium facilisis turpis aenean. Tellus
-          gravida platea natoque pretium. Fermentum quis id enim faucibus
-          viverra pellentesque non odio ut. Aenean pharetra egestas quisque
-          volutpat vitae nec quis. Enim purus tristique tristique fermentum cras
-          odio viverra cum. Ultrices sit purus porttitor dolor orci enim. Morbi
-          duis orci ac fringilla nulla.
+          Our short-let apartment in Abuja is a serene escape for both business
+          and leisure travelers. The apartment features a spacious living area,
+          fully-equipped kitchen, and cozy bedroom with en-suite bathroom.
+          Amenities include Starlinks, secure parking, 24/7 electricity and
+          water supply, and regular cleaning services. It's an ideal choice for
+          business travelers, couples, and solo travelers looking for a peaceful
+          retreat. We offer flexible stay options, competitive rates, and a
+          prime location in Abuja. Whether you're here for work or play, Our
+          apartment provides a comfortable and convenient base for your stay.
+          Book now and enjoy a hassle-free experience in the heart of Abuja.
         </p>
       </section>
       <section className="flex max-md:flex-col items-center px-[5%] gap-[5%] pt-[8%] lg:pt-[3%] justify-center">
@@ -88,7 +91,7 @@ const page = () => {
           alt="icon"
           width={350}
           height={350}
-          className="object-contain max-sm:object-cover  h-[350px] w-[250px] max-sm:w-full max-sm:h-[250px] max-sm:my-8"
+          className="object-contain rounded-lg max-sm:object-cover  h-[350px] w-[290px] max-sm:w-full max-sm:h-[250px] max-sm:my-8"
         />
         <div className="text-[#131927] flex flex-col gap-2">
           <h2 className="text-3xl font-bold mb-4">Our Vision & Mission</h2>
@@ -102,12 +105,12 @@ const page = () => {
           src="/images/frame2.png"
           alt="icon"
           width={350}
-          height={350}
-          className="object-contain max-sm:object-cover h-[350px] w-[250px] max-sm:h-[250px] max-sm:w-full"
+          height={450}
+          className="object-cover rounded-lg max-sm:object-cover !h-[450px] w-[350px] max-sm:!h-[250px] max-sm:w-full"
         />
         <div className="text-[#131927] flex flex-col gap-2">
           <h2 className="text-3xl font-bold mb-4">Our Values</h2>
-          {list1.map((text, index) => (
+          {list2.map((text, index) => (
             <List key={index} text={text} />
           ))}
         </div>
@@ -170,21 +173,21 @@ const page = () => {
           channels. Follow us or like us on...
         </p>
         <div className="flex justify-center gap-8 mt-6">
-          <Link href="#">
+          {/* <Link href="#">
             <FaFacebookF className="text-black" />
-          </Link>
-          <Link href="#">
+          </Link> */}
+          <Link href="https://x.com/towson_homes?s=21">
             <FaTwitter className="text-black" />
           </Link>
-          <Link href="#">
+          <Link href="https://www.instagram.com/towsonhomes?igsh=ZnZobm15aXJjbDJs&utm_source=qr">
             <FaInstagram className="text-black" />
           </Link>
-          <Link href="#">
+          {/* <Link href="#">
             <FaLinkedinIn className="text-black" />
           </Link>
           <Link href="#">
             <FaYoutube className="text-black" />
-          </Link>
+          </Link> */}
         </div>
       </section>
     </main>
@@ -193,7 +196,7 @@ const page = () => {
 
 function List({ text }) {
   return (
-    <div className="flex items-center">
+    <div className="flex text-md items-center">
       <div className="w-3 h-3 min-w-3 min-h-3 bg-[#131927] rounded-full mr-3 inline-block"></div>
       {text}
     </div>

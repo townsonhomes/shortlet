@@ -83,8 +83,8 @@ export default function NewsSection() {
           Hospitality <span className="text-yellow-400">News</span>
         </h2>
         <p className="mt-4 max-w-xl mx-auto text-gray-500">
-          Lorem ipsum dolor sit amet consectetur. Semper gravida a volutpat
-          egestas risus scelerisque amet.
+          Stay updated on the latest travel trends, hosting tips, and exclusive
+          deals curated just for you.
         </p>
       </div>
 

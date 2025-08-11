@@ -16,6 +16,7 @@ export async function POST(req) {
       images: body.images,
       pricePerDay: body.pricePerDay,
       amenities: body.amenities,
+      ownership: body.ownership,
     });
 
     const saved = await newShortlet.save();

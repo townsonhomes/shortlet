@@ -19,11 +19,17 @@ export default function AboutUsSection() {
           </h3>
 
           <p className="text-gray-500 leading-relaxed max-w-md">
-            Lorem ipsum dolor sit amet consectetur. Ornare auctor auctor
-            dictumst luctus dictumst eget pulvinar sit sed. Proin urna vitae
-            etiam cras amet tincidunt pretium. Urna facilisis duis semper orci
-            bibendum aliquam. Nisl blandit fermentum proin neque at integer sit
-            tempus.
+            Our short-let apartment in Abuja is a serene escape for both
+            business and leisure travelers. The apartment features a spacious
+            living area, fully-equipped kitchen, and cozy bedroom with en-suite
+            bathroom. Amenities include Starlinks, secure parking, 24/7
+            electricity and water supply, and regular cleaning services. It's an
+            ideal choice for business travelers, couples, and solo travelers
+            looking for a peaceful retreat. We offer flexible stay options,
+            competitive rates, and a prime location in Abuja. Whether you're
+            here for work or play, Our apartment provides a comfortable and
+            convenient base for your stay. Book now and enjoy a hassle-free
+            experience in the heart of Abuja.
           </p>
           <Link href="/about">
             <button className="mt-4 inline-flex items-center gap-2 self-start rounded-lg bg-neutral-900 text-white text-sm font-medium px-6 py-3 hover:bg-neutral-700 transition">
@@ -63,7 +69,7 @@ export default function AboutUsSection() {
           </div>
 
           {/* 📊 Stats card */}
-          <div className="absolute max-sm:w-[105%] bottom-8 left-1/2 max-lg:-translate-x-1/2 max-lg:w-[80%]  -translate-x-[90%] bg-white rounded-xl shadow-xl px-8 py-6 flex flex-row items-center justify-between gap-6 w-full">
+          <div className="absolute max-sm:w-[105%] bottom-8 left-1/2 max-lg:-translate-x-1/2 max-lg:w-[80%]  -translate-x-[85%] bg-white rounded-xl shadow-xl px-8 py-6 flex flex-row items-center justify-between gap-6 w-full">
             {/* Single stat */}
             <StatItem value="4+" label="Years Experience" />
             <Divider />

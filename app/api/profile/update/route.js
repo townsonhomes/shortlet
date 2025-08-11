@@ -9,13 +9,28 @@ export async function POST(req) {
     return Response.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const { phone, gender, nationality, state, address } = await req.json();
-
+  const { phone, gender, nationality, state, address, idImage, idType } =
+    await req.json();
   await dbConnect();
+
+  let isIdVerified = false;
+
+  if (idType && idImage) {
+    isIdVerified = true;
+  }
 
   const updated = await User.findOneAndUpdate(
     { email: session.user.email },
-    { phone, gender, nationality, state, address },
+    {
+      phone,
+      gender,
+      nationality,
+      state,
+      address,
+      idImage,
+      idType,
+      isIdVerified,
+    },
     { new: true }
   );
 
