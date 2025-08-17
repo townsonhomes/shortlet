@@ -1,14 +1,18 @@
 import { NextResponse } from "next/server";
 import { getToken } from "next-auth/jwt";
 
-const ADMIN_PATHS = [
-  "/admin",
-  "/api/admin",
-  "/api/shortlets/create",
-  "/api/shortlets/test",
-  "/api/upload",
+/* ========= ROUTE ACCESS DEFINITIONS ========= */
+
+// Public: no authentication required
+const PUBLIC_PATHS = [
+  "/api/auth",
+  "/_next",
+  "/search",
+  "/", // homepage
+  "/api/payment/webhook", // ✅ Allow Paystack webhook
 ];
 
+// User-only routes
 const USER_PATHS = [
   "/profile",
   "/api/profile",
@@ -18,100 +22,113 @@ const USER_PATHS = [
   "/api/verify-request",
 ];
 
-// 👇 Publicly accessible (no token or secret needed)
-const PUBLIC_PATHS = [
-  "/api/auth",
-  "/_next",
-  "/search",
-  "/", // homepage
-  "/api/payment/webhook", // ✅ Allow Paystack webhook access
+// Admin-level routes (both admin + sub-admin can access)
+const ADMIN_PATHS = [
+  "/admin",
+  "/api/admin",
+  "/api/shortlets/test",
+  "/api/upload",
 ];
 
-// 👇 Routes that support internal secret (e.g. webhook → /api/bookings/addBooking)
+// Full-admin-only routes
+const FULL_ADMIN_ONLY_PATHS = [
+  "/api/admin/shortlets/create",
+  "/api/admin/shortlets/delete",
+  "/api/admin/shortlets/owners",
+  "/api/admin/shortlets/update",
+  "/api/admin/analytics",
+];
+
+// Routes that allow internal secret (webhooks, services, etc.)
 const INTERNAL_SECRET_PATHS = [
   "/api/bookings/addBooking",
   "/api/admin/service/mark-paid",
 ];
 
+/* ========= MIDDLEWARE FUNCTION ========= */
 export async function middleware(req) {
   const { pathname } = req.nextUrl;
 
-  // ✅ Allow public routes
-  if (PUBLIC_PATHS.some((p) => pathname.startsWith(p))) {
+  // 1️⃣ Public routes → always allow
+  if (matches(pathname, PUBLIC_PATHS)) {
     return NextResponse.next();
   }
 
-  // ✅ Allow routes using x-internal-secret
-  if (INTERNAL_SECRET_PATHS.some((path) => pathname === path)) {
+  // 2️⃣ Internal secret routes
+  if (matchesExact(pathname, INTERNAL_SECRET_PATHS)) {
     const internalSecret = req.headers.get("x-internal-secret");
-    if (
-      internalSecret &&
-      internalSecret === process.env.INTERNAL_WEBHOOK_SECRET
-    ) {
+    if (internalSecret === process.env.INTERNAL_WEBHOOK_SECRET) {
       return NextResponse.next();
-    } else {
-      return NextResponse.json(
-        { error: "Unauthorized (internal)" },
-        { status: 401 }
-      );
     }
+    return unauthorized("Unauthorized (internal)");
   }
 
+  // 3️⃣ Get JWT token
   const token = await getToken({ req, secret: process.env.JWT_SECRET });
 
-  // ✅ Allow change-password for all authenticated users
+  // 4️⃣ Change-password route → allow if logged in
   if (pathname.startsWith("/api/change-password")) {
-    if (!token) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
+    return token ? NextResponse.next() : unauthorized();
+  }
+
+  // 5️⃣ Full-admin-only routes
+  if (matches(pathname, FULL_ADMIN_ONLY_PATHS)) {
+    if (!token) return redirectOr401(req, pathname);
+    if (token.role !== "admin") return forbidden("Admins only");
     return NextResponse.next();
   }
 
-  // 🔐 Admin-only protection
-  if (ADMIN_PATHS.some((path) => pathname.startsWith(path))) {
-    if (!token) {
-      return isApiRoute(pathname)
-        ? NextResponse.json({ error: "Unauthorized" }, { status: 401 })
-        : redirectToLogin(req);
-    }
-    if (token.role !== "admin") {
-      return isApiRoute(pathname)
-        ? NextResponse.json({ error: "Admins only" }, { status: 403 })
-        : redirectToLogin(req);
-    }
+  // 6️⃣ Admin-level routes (admin + sub-admin)
+  if (matches(pathname, ADMIN_PATHS)) {
+    if (!token) return redirectOr401(req, pathname);
+    if (!["admin", "sub-admin"].includes(token.role))
+      return forbidden("Admin access required");
     return NextResponse.next();
   }
 
-  // 👤 User-only protection
-  if (USER_PATHS.some((path) => pathname.startsWith(path))) {
-    if (!token) {
-      return isApiRoute(pathname)
-        ? NextResponse.json({ error: "Unauthorized" }, { status: 401 })
-        : redirectToLogin(req);
-    }
-    if (token.role !== "user") {
-      return isApiRoute(pathname)
-        ? NextResponse.json({ error: "Users only" }, { status: 403 })
-        : redirectToLogin(req);
-    }
+  // 7️⃣ User-only routes
+  if (matches(pathname, USER_PATHS)) {
+    if (!token) return redirectOr401(req, pathname);
+    if (token.role !== "user") return forbidden("Users only");
     return NextResponse.next();
   }
 
+  // 8️⃣ If route not matched above → allow
   return NextResponse.next();
 }
 
-// Helper: Detect API route
+/* ========= HELPERS ========= */
+function matches(pathname, paths) {
+  return paths.some((p) => pathname.startsWith(p));
+}
+
+function matchesExact(pathname, paths) {
+  return paths.some((p) => pathname === p);
+}
+
 function isApiRoute(pathname) {
   return pathname.startsWith("/api");
 }
 
-// Helper: Redirect UI users to login
+function redirectOr401(req, pathname) {
+  return isApiRoute(pathname) ? unauthorized() : redirectToLogin(req);
+}
+
+function unauthorized(msg = "Unauthorized") {
+  return NextResponse.json({ error: msg }, { status: 401 });
+}
+
+function forbidden(msg = "Forbidden") {
+  return NextResponse.json({ error: msg }, { status: 403 });
+}
+
 function redirectToLogin(req) {
   const loginUrl = new URL("/login", req.url);
   loginUrl.searchParams.set("callbackUrl", req.url);
   return NextResponse.redirect(loginUrl);
 }
 
+/* ========= CONFIG ========= */
 export const config = {
   matcher: ["/admin/:path*", "/profile/:path*", "/api/:path*"],
 };

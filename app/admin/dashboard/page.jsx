@@ -13,6 +13,7 @@ import { format } from "date-fns";
 import { getAllBookings } from "@/lib/actions/getAllBookings";
 import { getAllUsers } from "@/lib/actions/getAllUsers";
 import { getAllServices } from "@/lib/actions/getAllServices";
+import { getAllSubAdmins } from "@/lib/actions/getAllSubAdmins";
 import DashboardContent from "@/components/admin/DashboardContent";
 
 export default async function AdminDashboardPage(context) {
@@ -25,6 +26,7 @@ export default async function AdminDashboardPage(context) {
     allBookings,
     allUsers,
     allServices,
+    allSubAdmins,
     checkIns,
     checkOuts,
     reservations,
@@ -33,6 +35,7 @@ export default async function AdminDashboardPage(context) {
     getAllBookings(),
     getAllUsers(),
     getAllServices(),
+    getAllSubAdmins(),
     Booking.countDocuments({
       status: "confirmed",
       checkInDate: {
@@ -87,6 +90,7 @@ export default async function AdminDashboardPage(context) {
           bookings={allBookings}
           users={allUsers}
           services={allServices}
+          subAdmins={allSubAdmins}
         />
       </div>
     </DashboardLayout>

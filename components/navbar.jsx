@@ -75,7 +75,7 @@ export default function Navbar() {
         />
       </Link>
       <div className="max-xl:hidden mr-auto font-bold text-lg ml-5 text-[#131927]">
-        Townson apartments & Homes
+        Townson Apartments & Homes
       </div>
       {/* Centered Desktop Navigation */}
       <nav className="hidden md:flex items-center w-full max-w-2xl absolute lg:left-1/2 md:left-[45%] transform -translate-x-1/2">
@@ -139,7 +139,8 @@ export default function Navbar() {
               >
                 <Link
                   href={
-                    session.user.role === "admin"
+                    session.user.role === "admin" ||
+                    session.user.role === "sub-admin"
                       ? "/admin/dashboard"
                       : "/profile"
                   }
@@ -147,7 +148,10 @@ export default function Navbar() {
                   onClick={() => setDropdownOpen(false)}
                 >
                   <FaUser className="mr-2" />
-                  {session.user.role === "admin" ? "Dashboard" : "My Profile"}
+                  {session.user.role === "admin" ||
+                  session.user.role === "sub-admin"
+                    ? "Dashboard"
+                    : "My Profile"}
                 </Link>
 
                 <button

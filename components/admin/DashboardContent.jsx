@@ -1,4 +1,3 @@
-// components/admin/DashboardContent.jsx
 "use client";
 
 import { useSearchParams } from "next/navigation";
@@ -8,26 +7,63 @@ import ApartmentsSection from "./shortlet/ApartmentsSection";
 import CustomersSection from "./CustomersSection";
 import SettingsSection from "./SettingsSection";
 import ServicesSection from "./ServicesSection";
+import AnalyticsSection from "../analytics/AnalyticsSection";
+import SubAdminSection from "./SubAdminSection";
 import Loader from "@/components/Loader";
+import { useSession } from "next-auth/react";
 
-function DashboardContent({ bookings, users, services }) {
+function DashboardContent({ bookings, users, services, subAdmins }) {
+  const { data: session } = useSession();
   const searchParams = useSearchParams();
   const view = searchParams.get("view") || "bookings";
+  const role = session?.user?.role;
 
-  if (view === "bookings" || !view)
-    return <RecentReservationsTable bookings={bookings} />;
-  if (view === "apartments") return <ApartmentsSection />;
-  if (view === "guests") return <CustomersSection users={users} />;
-  if (view === "services") return <ServicesSection services={services} />;
-  if (view === "settings") return <SettingsSection />;
+  // Whitelist allowed views based on role
+  const allowedViews =
+    role === "admin"
+      ? [
+          "bookings",
+          "guests",
+          "services",
+          "settings",
+          "apartments",
+          "sub-admin",
+          "analytics",
+        ]
+      : ["bookings", "guests", "services", "settings"];
 
-  //   return <p className="text-gray-600">Please select a section.</p>;
+  // If user tries to access a view they don't have permission for, default to bookings
+  const safeView = allowedViews.includes(view) ? view : "bookings";
+
+  switch (safeView) {
+    case "bookings":
+      return <RecentReservationsTable bookings={bookings} />;
+    case "guests":
+      return <CustomersSection users={users} />;
+    case "services":
+      return <ServicesSection services={services} />;
+    case "settings":
+      return <SettingsSection />;
+    case "apartments":
+      return <ApartmentsSection />;
+    case "sub-admin":
+      return <SubAdminSection subAdmins={subAdmins} />;
+    case "analytics":
+      return <AnalyticsSection />;
+    default:
+      return <RecentReservationsTable bookings={bookings} />;
+  }
 }
 
-export default function PageSuspense({ bookings, users, services }) {
+export default function PageSuspense({ bookings, users, services, subAdmins }) {
   return (
     <Suspense fallback={<Loader />}>
-      <DashboardContent bookings={bookings} users={users} services={services} />
+      <DashboardContent
+        bookings={bookings}
+        users={users}
+        services={services}
+        subAdmins={subAdmins}
+      />
     </Suspense>
   );
 }

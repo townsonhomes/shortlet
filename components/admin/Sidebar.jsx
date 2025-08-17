@@ -10,19 +10,28 @@ import {
   FaConciergeBell,
   FaUsers,
   FaClipboardList,
+  FaChartPie,
+  FaUserCog,
 } from "react-icons/fa";
 import { X } from "lucide-react";
 import LogoutConfirmModal from "@/components/ConfirmModal";
 import { signOut } from "next-auth/react";
 import { Suspense, useState } from "react";
 import Loader from "@/components/Loader";
+import { useSession } from "next-auth/react";
 
 const links = [
-  { label: "Bookings", icon: <FaClipboardList />, view: "bookings" },
-  { label: "Shortlets", icon: <FaBed />, view: "apartments" },
-  { label: "Customers", icon: <FaUsers />, view: "guests" },
-  { label: "Services", icon: <FaConciergeBell />, view: "services" },
-  { label: "Settings", icon: <FaCog />, view: "settings" },
+  { label: "Bookings", icon: <FaClipboardList size={20} />, view: "bookings" },
+  { label: "Shortlets", icon: <FaBed size={20} />, view: "apartments" },
+  { label: "Customers", icon: <FaUsers size={20} />, view: "guests" },
+  { label: "Services", icon: <FaConciergeBell size={20} />, view: "services" },
+  { label: "Analytics", icon: <FaChartPie size={20} />, view: "analytics" },
+  {
+    label: "Sub Admin",
+    icon: <FaUserCog size={20} />,
+    view: "sub-admin",
+  },
+  { label: "Settings", icon: <FaCog size={20} />, view: "settings" },
 ];
 
 function AdminSidebar({ isOpen, onClose }) {
@@ -72,6 +81,16 @@ function AdminSidebar({ isOpen, onClose }) {
 
 function SidebarContent({ currentView, handleClick }) {
   const [showLogoutModal, setShowLogoutModal] = useState(false);
+  const { data: session } = useSession();
+  const role = session?.user.role;
+
+  const allowedLinks =
+    role === "admin"
+      ? links
+      : links.filter((link) =>
+          ["Bookings", "Customers", "Services", "Settings"].includes(link.label)
+        );
+
   const confirmLogout = () => {
     setShowLogoutModal(false);
     signOut({ callbackUrl: "/login" });
@@ -79,9 +98,8 @@ function SidebarContent({ currentView, handleClick }) {
   return (
     <>
       <ul className="space-y-4 mb-6">
-        {links.map(({ label, icon, view }) => {
+        {allowedLinks.map(({ label, icon, view }) => {
           const isActive = currentView === view;
-
           return (
             <li key={label}>
               <button

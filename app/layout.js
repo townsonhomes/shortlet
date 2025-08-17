@@ -2,6 +2,8 @@
 import "./globals.css";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
+import "react-datepicker/dist/react-datepicker.css";
+
 import { Providers } from "./providers";
 import LayoutClient from "./LayoutClient";
 

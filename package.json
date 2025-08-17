@@ -12,6 +12,7 @@
     "@auth/mongodb-adapter": "^3.9.1",
     "@headlessui/react": "^2.2.4",
     "@heroicons/react": "^2.2.0",
+    "@hookform/resolvers": "^5.2.1",
     "axios": "^1.9.0",
     "bcrypt": "^6.0.0",
     "cloudinary": "^2.7.0",
@@ -34,7 +35,10 @@
     "react-hot-toast": "^2.5.2",
     "react-icons": "^5.5.0",
     "react-phone-number-input": "^3.4.12",
-    "react-spinners": "^0.17.0"
+    "react-spinners": "^0.17.0",
+    "react-toastify": "^11.0.5",
+    "recharts": "^3.1.2",
+    "yup": "^1.7.0"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
