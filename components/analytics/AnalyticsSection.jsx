@@ -15,6 +15,7 @@ import LoaderOverlay from "../LoaderOverlay";
 import StatCardSkeleton from "../admin/StatCardSkeleton";
 
 export default function AnalyticsSection({ defaultMock = false }) {
+  const [activePreset, setActivePreset] = useState(null);
   // default date range = last 30 days (YYYY-MM-DD strings)
   const getDefault = () => {
     const now = new Date();
@@ -101,6 +102,7 @@ export default function AnalyticsSection({ defaultMock = false }) {
       setStart(startStr); // update UI
       setEnd(endStr);
       setRangeLabel(`${startStr} → ${endStr}`);
+      setActivePreset(days);
     } catch (err) {
       toast.error("Failed to fetch analytics for preset range");
     }
@@ -209,19 +211,31 @@ export default function AnalyticsSection({ defaultMock = false }) {
 
             <button
               onClick={() => applyPreset(7)}
-              className="px-3 py-2 border rounded-lg text-sm hover:bg-gray-50"
+              className={`px-3 py-2 border rounded-lg text-sm transition ${
+                activePreset === 7
+                  ? "bg-blue-600 text-white border-blue-600"
+                  : "hover:bg-gray-100"
+              }`}
             >
               7d
             </button>
             <button
               onClick={() => applyPreset(30)}
-              className="px-3 py-2 border rounded-lg text-sm hover:bg-gray-50"
+              className={`px-3 py-2 border rounded-lg text-sm transition ${
+                activePreset === 30
+                  ? "bg-blue-600 text-white border-blue-600"
+                  : "hover:bg-gray-100"
+              }`}
             >
               30d
             </button>
             <button
               onClick={() => applyPreset(90)}
-              className="px-3 py-2 border rounded-lg text-sm hover:bg-gray-50"
+              className={`px-3 py-2 border rounded-lg text-sm transition ${
+                activePreset === 90
+                  ? "bg-blue-600 text-white border-blue-600"
+                  : "hover:bg-gray-100"
+              }`}
             >
               90d
             </button>
@@ -366,7 +380,7 @@ export default function AnalyticsSection({ defaultMock = false }) {
       {/* Top lists */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div className="bg-white rounded-2xl p-4 shadow-sm">
-          <h4 className="font-semibold mb-3">Top Properties (by revenue)</h4>
+          <h4 className="font-semibold mb-3">Top Properties (By revenue)</h4>
           {analytics?.topShortletsByRevenue?.length ? (
             <ul className="space-y-3">
               {analytics.topShortletsByRevenue.map((s, i) => (
@@ -395,7 +409,7 @@ export default function AnalyticsSection({ defaultMock = false }) {
         </div>
 
         <div className="bg-white rounded-2xl p-4 shadow-sm">
-          <h4 className="font-semibold mb-3">Top Customers (by Expenses)</h4>
+          <h4 className="font-semibold mb-3">Top Customers (By Expenses)</h4>
           {analytics?.users?.topCustomers?.length ? (
             <ul className="space-y-3">
               {analytics.users.topCustomers.map((c, i) => (
