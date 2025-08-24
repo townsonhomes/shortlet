@@ -4,7 +4,7 @@ import {
   computeAnalytics,
   generateMockAnalytics,
   parseDateParam,
-} from "./lib/analyticsUtils";
+} from "../lib/analyticsUtils.js";
 
 const JWT_SECRET = process.env.JWT_SECRET ?? "";
 
