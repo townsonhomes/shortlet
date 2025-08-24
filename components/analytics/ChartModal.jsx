@@ -74,7 +74,7 @@ export default function ChartModal({
                 Export PNG
               </button>
 
-              <button
+              {/* <button
                 onClick={() => {
                   try {
                     exportDataAsCSV(
@@ -91,7 +91,7 @@ export default function ChartModal({
                 className="px-3 py-2 bg-gray-100 rounded-md text-sm hover:bg-gray-200"
               >
                 Export CSV
-              </button>
+              </button> */}
 
               <button
                 onClick={onClose}

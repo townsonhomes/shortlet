@@ -74,8 +74,8 @@ export default function ShortletForm({ shortlet, onClose, onRefresh }) {
         const res = await fetch("/api/admin/shortlets/owners");
         const data = await res.json();
         const all = Array.isArray(data)
-          ? ["Townson Homes", ...data.filter((o) => o !== "Townson Homes")]
-          : ["Townson Homes"];
+          ? ["Towson Homes", ...data.filter((o) => o !== "Towson Homes")]
+          : ["Towson Homes"];
         setOwners([...new Set(all)]);
       } catch (err) {
         console.error("Failed to fetch owners:", err);

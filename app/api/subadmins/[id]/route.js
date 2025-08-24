@@ -4,7 +4,8 @@ import User from "@/models/User";
 import mongoose from "mongoose";
 import { getToken } from "next-auth/jwt";
 
-export async function DELETE(req, { params }) {
+export async function DELETE(req, context) {
+  const params = await context.params;
   try {
     // auth: admins only
     const token = await getToken({ req, secret: process.env.JWT_SECRET });

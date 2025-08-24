@@ -44,7 +44,7 @@ export async function POST(req) {
         </ul>
         <p>Please log in to your account to proceed with payment.</p>
         <br />
-        <p>Thank you!<br/>Townson Homes & Apartments Admin Team</p>
+        <p>Thank you!<br/>Towson Apartments & Homes Admin Team</p>
       </div>
     `;
 

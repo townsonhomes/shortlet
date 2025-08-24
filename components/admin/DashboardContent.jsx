@@ -2,7 +2,7 @@
 
 import { useSearchParams } from "next/navigation";
 import { Suspense } from "react";
-import RecentReservationsTable from "./RecentReservationsTable";
+import RecentReservationsTable from "./RecentReservationsTable"; //bookings table with list of bookings
 import ApartmentsSection from "./shortlet/ApartmentsSection";
 import CustomersSection from "./CustomersSection";
 import SettingsSection from "./SettingsSection";

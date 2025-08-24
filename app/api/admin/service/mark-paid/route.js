@@ -76,7 +76,7 @@ export async function PUT(req) {
     </p>
 
     <p style="margin-top: 30px; font-size: 14px;">
-      Thank you for choosing <strong>Townson Homes</strong>.<br/>
+      Thank you for choosing <strong>Towson Apartments & Homes</strong>.<br/>
       <span style="color: #999;">— Admin Team</span>
     </p>
   </div>

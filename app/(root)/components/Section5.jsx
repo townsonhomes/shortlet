@@ -13,6 +13,9 @@ const features = [
   { icon: "/images/icon-door.png", label: "Security Doors" },
   { icon: "/images/laundry.png", label: "Laundry" },
   { icon: "/images/kitchen.png", label: "Kitchen" },
+  { icon: "/images/truck.png", label: "Logistic Services" },
+  { icon: "/images/prompt.png", label: "Prompt Inhouse Services" },
+  { icon: "/images/security.png", label: "Armed/Unarmed Escort" },
 ];
 
 export default function FeaturesSection() {

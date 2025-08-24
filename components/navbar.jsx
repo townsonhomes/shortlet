@@ -75,7 +75,7 @@ export default function Navbar() {
         />
       </Link>
       <div className="max-xl:hidden mr-auto font-bold text-lg ml-5 text-[#131927]">
-        Townson Apartments & Homes
+        Towson Apartments & Homes
       </div>
       {/* Centered Desktop Navigation */}
       <nav className="hidden md:flex items-center w-full max-w-2xl absolute lg:left-1/2 md:left-[45%] transform -translate-x-1/2">

@@ -17,14 +17,14 @@ export async function POST(req) {
       );
     }
 
-    const subject = `Townson Homes & Apartments - Notification`;
+    const subject = `Towson Apartments & Homes - Notification`;
 
     const html = `
       <div style="font-family: sans-serif; line-height: 1.6">
         <p>Hi <strong>${name || "User"}</strong>,</p>
         <p>${message}</p>
         <br />
-        <p>Best regards,<br/>The Townson Homes Admin Team</p>
+        <p>Best regards,<br/>The Towson Apartments & Homes Admin Team</p>
       </div>
     `;
 

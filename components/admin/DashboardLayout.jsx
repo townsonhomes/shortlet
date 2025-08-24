@@ -16,7 +16,7 @@ export default function DashboardLayout({ children }) {
       />
 
       {/* Main Content */}
-      <div className="flex-1 lg:ml-56">
+      <div className="flex-1 lg:ml-56 overflow-hidden">
         {/* Mobile Nav Toggle Button */}
         <div className="lg:hidden p-4">
           <button
