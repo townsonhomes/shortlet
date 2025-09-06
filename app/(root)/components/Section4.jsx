@@ -10,17 +10,17 @@ const slides = [
   {
     title: "One Room and Parlour with Kitchen",
     desc: "Compact urban living with full kitchen - perfect for solo travelers or couples.",
-    img: "/images/house-1.png",
+    img: "/images/New/house-1.jpg",
   },
   {
     title: "Two-Bedroom Luxury Suite",
     desc: "Spacious retreat with premium amenities for families or small groups.",
-    img: "/images/house1.png",
+    img: "/images/New/house2.jpg",
   },
   {
     title: "Modern Duplex Apartment",
     desc: "Stylish two-level living with contemporary design and city views.",
-    img: "/images/house2.jpg",
+    img: "/images/New/hero-img3.jpg",
   },
 ];
 

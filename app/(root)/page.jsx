@@ -14,17 +14,17 @@ import HeroSlider from "@/components/HeroSlider";
 
 const heroSlides = [
   {
-    imageUrl: "/images/hero-img.jpg",
+    imageUrl: "/images/New/hero-img.jpg",
     headline: "Your home",
     highlight: "away from home",
   },
   {
-    imageUrl: "/images/house1.png",
+    imageUrl: "/images/New/house-7.jpg",
     headline: "Luxury stays",
     highlight: "for every traveler",
   },
   {
-    imageUrl: "/images/house2.jpg",
+    imageUrl: "/images/New/house2.jpg",
     headline: "Comfort meets",
     highlight: "convenience",
   },

@@ -36,6 +36,10 @@ const menuLinks = [
   { name: "Home", link: "/" },
   { name: "Short-Lets", link: "/search" },
   { name: "About Us", link: "/about" },
+  { name: "Car Hire", link: "http://towsoncarhire.com" },
+  { name: "Laundry", link: "http://towsonluxelaundry.com" },
+  { name: "Spa", link: "http://towsonluxespa.com" },
+  { name: "Kitchen", link: "http://towsonkitchen.com" },
   { name: "Blog", link: "https://towsonsgetaway.org/blog" },
   { name: "Partnership", link: "/contact-us" },
 ];

@@ -12,7 +12,12 @@ import {
   FaUser,
   FaSignOutAlt,
   FaClipboardList,
+  FaCar,
+  FaSpa,
+  FaKitchenSet,
 } from "react-icons/fa";
+
+import { MdLocalLaundryService, MdOutlineSoupKitchen } from "react-icons/md";
 import Link from "next/link";
 import { useSession, signOut } from "next-auth/react";
 import Image from "next/image";
@@ -41,6 +46,26 @@ export default function Navbar() {
       icon: <FaInfoCircle className="md:hidden mr-3" />,
     },
     {
+      label: "Car Hire",
+      href: "http://towsoncarhire.com",
+      icon: <FaCar className="md:hidden mr-3" />,
+    },
+    {
+      label: "Laundry",
+      href: "http://towsonluxelaundry.com",
+      icon: <MdLocalLaundryService className="md:hidden mr-3" />,
+    },
+    {
+      label: "Spa",
+      href: "http://towsonluxespa.com",
+      icon: <FaSpa className="md:hidden mr-3" />,
+    },
+    {
+      label: "Kitchen",
+      href: "http://towsonkitchen.com",
+      icon: <MdOutlineSoupKitchen className="md:hidden mr-3" />,
+    },
+    {
       label: "Blog",
       href: "https://towsonsgetaway.org/blog",
       icon: <FaBlog className="md:hidden mr-3" />,
@@ -63,7 +88,7 @@ export default function Navbar() {
   }, []);
 
   return (
-    <header className="w-full px-4 md:px-16 py-4 max-sm:py-2 flex items-center justify-between bg-white relative z-50 shadow">
+    <header className="w-full px-4 md:px-4 py-4 max-sm:py-2 flex items-center justify-between bg-white relative z-50 shadow">
       {/* Logo */}
       <Link href="/" className="text-xl font-bold flex items-center z-50">
         <Image
@@ -78,8 +103,8 @@ export default function Navbar() {
         Towson Apartments & Homes
       </div>
       {/* Centered Desktop Navigation */}
-      <nav className="hidden md:flex items-center w-full max-w-2xl absolute lg:left-1/2 md:left-[45%] transform -translate-x-1/2">
-        <div className="flex justify-center w-full gap-8">
+      <nav className="hidden md:flex items-center w-full max-w-2xl absolute lg:left-[55%] md:left-[45%] transform -translate-x-1/2">
+        <div className="flex justify-center w-full gap-5">
           {navItems.map((item) => (
             <Link
               key={item.label}
