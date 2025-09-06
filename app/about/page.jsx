@@ -56,7 +56,7 @@ const page = () => {
     <main>
       <section
         className="relative h-[35vh] lg:h-[50vh] pt-20 bg-cover bg-center"
-        style={{ backgroundImage: `url('/images/New/house2.jpg')` }}
+        style={{ backgroundImage: `url('/images/recent/house2.jpg')` }}
       >
         <div className="absolute inset-0 bg-black/40 flex flex-col justify-center items-center max-sm:justify-start max-sm:pt-[25%] px-6 md:px-20">
           <h1 className="text-white text-4xl -mt-8 lg:-mt-16 text-center md:text-6xl font-bold max-w-xl leading-tight">
@@ -156,7 +156,7 @@ const page = () => {
         {/* Right image */}
         <div className="rounded-xl overflow-hidden shadow-lg max-w-[500px] w-full">
           <Image
-            src="/images/New/house-4.jpg"
+            src="/images/recent/house-4.jpg"
             alt="Hotel Room"
             width={800}
             height={600}

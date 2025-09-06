@@ -59,7 +59,7 @@ export default function SearchResultsContent() {
 
       <section
         className="relative h-[35vh] lg:h-[50vh] pt-20 bg-cover bg-center"
-        style={{ backgroundImage: `url('/images/New/house-6.jpg')` }}
+        style={{ backgroundImage: `url('/images/recent/house-6.jpg')` }}
       >
         <div className="absolute inset-0 bg-black/40 flex flex-col justify-center items-center max-sm:justify-start max-sm:pt-[25%] px-6 md:px-20">
           <h1 className="text-white text-4xl text-center md:text-6xl font-bold max-w-xl leading-tight">
