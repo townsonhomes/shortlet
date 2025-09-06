@@ -33,15 +33,15 @@ const contactDetails = [
 ];
 
 const menuLinks = [
-  { name: "Home", link: "/" },
-  { name: "Short-Lets", link: "/search" },
-  { name: "About Us", link: "/about" },
-  { name: "Car Hire", link: "http://towsoncarhire.com" },
-  { name: "Laundry", link: "http://towsonluxelaundry.com" },
-  { name: "Spa", link: "http://towsonluxespa.com" },
-  { name: "Kitchen", link: "http://towsonkitchen.com" },
-  { name: "Blog", link: "https://towsonsgetaway.org/blog" },
-  { name: "Partnership", link: "/contact-us" },
+  { name: "Home", link: "/", external: false },
+  { name: "Short-Lets", link: "/search", external: false },
+  { name: "About Us", link: "/about", external: false },
+  { name: "Car Hire", link: "http://towsoncarhire.com", external: true },
+  { name: "Laundry", link: "http://towsonluxelaundry.com", external: true },
+  { name: "Spa", link: "http://towsonluxespa.com", external: true },
+  { name: "Kitchen", link: "http://towsonkitchen.com", external: true },
+  { name: "Blog", link: "https://towsonsgetaway.org/blog", external: true },
+  { name: "Partnership", link: "/contact-us", external: false },
 ];
 
 const socialContacts = [
@@ -86,9 +86,15 @@ export default function Footer() {
         <div>
           <h4 className="text-[#f5c252] font-semibold mb-4">Menu</h4>
           <ul className="space-y-3 text-sm">
-            {menuLinks.map(({ name, link }) => (
+            {menuLinks.map(({ name, link, external }) => (
               <li key={name}>
-                <Link href={link}>{name}</Link>
+                <Link
+                  href={link}
+                  target={external ? "_blank" : undefined}
+                  rel={external ? "noopener noreferrer" : undefined}
+                >
+                  {name}
+                </Link>
               </li>
             ))}
           </ul>

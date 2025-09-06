@@ -34,46 +34,59 @@ export default function Navbar() {
   const { openDrawer } = useProfileDrawer();
 
   const navItems = [
-    { label: "Home", href: "/", icon: <FaHome className="md:hidden mr-3" /> },
+    {
+      label: "Home",
+      href: "/",
+      icon: <FaHome className="md:hidden mr-3" />,
+      external: false,
+    },
     {
       label: "Short-Lets",
       href: "/search",
       icon: <FaBed className="md:hidden mr-3" />,
+      external: false,
     },
     {
       label: "About Us",
       href: "/about",
       icon: <FaInfoCircle className="md:hidden mr-3" />,
+      external: false,
     },
     {
       label: "Car Hire",
       href: "http://towsoncarhire.com",
       icon: <FaCar className="md:hidden mr-3" />,
+      external: true,
     },
     {
       label: "Laundry",
       href: "http://towsonluxelaundry.com",
       icon: <MdLocalLaundryService className="md:hidden mr-3" />,
+      external: true,
     },
     {
       label: "Spa",
       href: "http://towsonluxespa.com",
       icon: <FaSpa className="md:hidden mr-3" />,
+      external: true,
     },
     {
       label: "Kitchen",
       href: "http://towsonkitchen.com",
       icon: <MdOutlineSoupKitchen className="md:hidden mr-3" />,
+      external: true,
     },
     {
       label: "Blog",
       href: "https://towsonsgetaway.org/blog",
       icon: <FaBlog className="md:hidden mr-3" />,
+      external: true,
     },
     {
       label: "Partnership",
       href: "/contact-us",
       icon: <FaEnvelope className="md:hidden mr-3" />,
+      external: false,
     },
   ];
 
@@ -109,6 +122,8 @@ export default function Navbar() {
             <Link
               key={item.label}
               href={item.href}
+              target={item.external ? "_blank" : undefined}
+              rel={item.external ? "noopener noreferrer" : undefined}
               className={`py-1 text-gray-700 hover:text-yellow-700 ${
                 pathname === item.href && "text-yellow-700"
               } font-medium relative group transition-colors duration-200`}

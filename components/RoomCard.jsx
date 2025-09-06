@@ -44,10 +44,21 @@ export default function RoomCard({ room }) {
             </div>
           </div>
 
-          <p className="text-lg font-semibold mb-1">
+          <p className="text-lg font-semibold text-green-500 mb-1">
             ₦{room.pricePerDay?.toLocaleString()}
             <span className="text-base font-normal"> / Night</span>
           </p>
+          {new Date() < new Date(2025, 10, 1) && (
+            <>
+              <p className="text-[12px] mb-1 line-through">
+                ₦{(room.pricePerDay / 0.8).toLocaleString()}{" "}
+                <span> / Night</span>
+              </p>
+              <p className="text-[12px] font-semibold text-green-500 mb-1">
+                20% Discount until November
+              </p>
+            </>
+          )}
           <p className="text-gray-500  text-[14px] font-medium">
             {room.category}
           </p>
