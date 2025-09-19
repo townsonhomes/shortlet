@@ -4,6 +4,7 @@ import { getToken } from "next-auth/jwt";
 import dbConnect from "@/lib/dbConnect";
 import Booking from "@/models/Booking";
 import Service from "@/models/Service";
+import Shortlet from "@/models/Shortlet";
 
 const JWT_SECRET = process.env.JWT_SECRET ?? "";
 

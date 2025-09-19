@@ -4,6 +4,7 @@ import Image from "next/image";
 import { Pencil } from "lucide-react";
 import { motion } from "framer-motion";
 import ShortletDetailsModal from "./ShortletDetailsModal";
+import BookingFormModal from "./BookingFormModal";
 import { useState } from "react";
 
 export default function ShortletCard({
@@ -13,6 +14,7 @@ export default function ShortletCard({
   isDeleting,
 }) {
   const [showDetails, setShowDetails] = useState(false);
+  const [showBookingModal, setShowBookingModal] = useState(false);
   return (
     <>
       <motion.div
@@ -81,6 +83,13 @@ export default function ShortletCard({
                 </button>
               </div>
 
+              <button
+                onClick={() => setShowBookingModal(true)}
+                className="px-0.5 py-1.5 bg-green-500 text-white rounded text-[12px] hover:bg-green-600"
+              >
+                + Add Booking
+              </button>
+
               {/* Delete Trigger */}
               <div className="flex ml-auto self-end pt-1">
                 <button
@@ -124,6 +133,13 @@ export default function ShortletCard({
         <ShortletDetailsModal
           shortlet={shortlet}
           onClose={() => setShowDetails(false)}
+        />
+      )}
+      {showBookingModal && (
+        <BookingFormModal
+          shortlet={shortlet}
+          onClose={() => setShowBookingModal(false)}
+          onSuccess={() => {}}
         />
       )}
     </>
