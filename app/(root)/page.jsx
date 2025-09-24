@@ -14,7 +14,7 @@ import HeroSlider from "@/components/HeroSlider";
 
 const heroSlides = [
   {
-    imageUrl: "/images/recent/hero-img.jpg",
+    imageUrl: "/images/recent/TOW2.jpg",
     headline: "Your home",
     highlight: "away from home",
   },
