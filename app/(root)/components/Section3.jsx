@@ -48,7 +48,7 @@ export default function AboutUsSection() {
         <div className="relative w-full">
           {/* Main hero image */}
           <Image
-            src="/images/recent/hero-img3.jpg" // 👉 replace with your main image
+            src="/images/recent/TOW13.jpg" // 👉 replace with your main image
             alt="About us building interior"
             width={900}
             height={900}
