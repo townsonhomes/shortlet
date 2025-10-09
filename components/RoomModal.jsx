@@ -43,7 +43,7 @@ export default function RoomModal({ isOpen, onClose, room }) {
       if (checkInDate && checkOutDate) {
         localStorage.setItem("bookingData", JSON.stringify(bookingData));
       }
-      router.push("/login");
+      router.push("/register");
     }
   };
 
@@ -62,7 +62,7 @@ export default function RoomModal({ isOpen, onClose, room }) {
       );
     } else {
       localStorage.setItem("bookingData", JSON.stringify(bookingData));
-      router.push("/login");
+      router.push("/register");
     }
   };
 
