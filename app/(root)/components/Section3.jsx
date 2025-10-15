@@ -48,7 +48,7 @@ export default function AboutUsSection() {
         <div className="relative w-full">
           {/* Main hero image */}
           <Image
-            src="/images/recent/TOW13.jpg" // 👉 replace with your main image
+            src="/images/recent/T13.jpg" // 👉 replace with your main image
             alt="About us building interior"
             width={900}
             height={900}
@@ -69,7 +69,7 @@ export default function AboutUsSection() {
           </div>
 
           {/* 📊 Stats card */}
-          <div className="absolute max-sm:w-[105%] bottom-8 left-1/2 max-lg:-translate-x-1/2 max-lg:w-[80%]  -translate-x-[85%] bg-white rounded-xl shadow-xl px-8 py-6 flex flex-row items-center justify-between gap-6 w-full">
+          <div className="absolute max-sm:w-[105%] bottom-8 left-1/2 max-lg:-translate-x-1/2 max-lg:w-[80%]  -translate-x-[75%] bg-white rounded-xl shadow-xl px-8 py-6 flex flex-row items-center justify-between gap-6 w-full">
             {/* Single stat */}
             <StatItem value="4+" label="Years Experience" />
             <Divider />

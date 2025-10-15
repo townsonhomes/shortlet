@@ -156,7 +156,7 @@ const page = () => {
         {/* Right image */}
         <div className="rounded-xl overflow-hidden shadow-lg max-w-[500px] w-full">
           <Image
-            src="/images/recent/house-4.jpg"
+            src="/images/recent/T1.jpg"
             alt="Hotel Room"
             width={800}
             height={600}

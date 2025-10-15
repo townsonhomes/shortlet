@@ -15,7 +15,7 @@ export default function HeroSlider({ slides }) {
   }, [slides.length]);
 
   return (
-    <div className="relative h-[50vh] sm:h-[60vh] lg:h-[50vh] w-full">
+    <div className="relative h-[50vh] sm:h-[60vh] lg:h-[75vh] w-full">
       <AnimatePresence mode="wait">
         <motion.div
           key={slides[currentSlide].imageUrl}

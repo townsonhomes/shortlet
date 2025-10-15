@@ -19,12 +19,12 @@ const heroSlides = [
     highlight: "away from home",
   },
   {
-    imageUrl: "/images/recent/TOW8.jpg",
+    imageUrl: "/images/recent/T8.jpg",
     headline: "Luxury stays",
     highlight: "for every traveler",
   },
   {
-    imageUrl: "/images/recent/TOW9.jpg",
+    imageUrl: "/images/recent/T7.jpg",
     headline: "Comfort meets",
     highlight: "convenience",
   },
