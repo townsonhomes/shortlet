@@ -25,11 +25,13 @@ export default function RoomModal({ isOpen, onClose, room }) {
   const touchStartXRef = useRef(null);
   const touchEndXRef = useRef(null);
   const pointerStartXRef = useRef(null);
+  const lastInteractionRef = useRef(0); // prevents double-triggering
 
   // Config
   const AUTOPLAY_MS = 2500; // autoplay interval
   const PAUSE_AFTER_INTERACTION_MS = 3000; // pause before resuming autoplay
   const SWIPE_THRESHOLD_PX = 50; // minimum swipe distance to trigger
+  const INTERACTION_LOCK_MS = 400; // guard window to prevent double triggers
 
   const handleBookClick = () => {
     const { _id: roomId } = room;
@@ -80,6 +82,14 @@ export default function RoomModal({ isOpen, onClose, room }) {
     }
   };
 
+  // internal guard utility
+  const interactionAllowed = () => {
+    const now = Date.now();
+    if (now - lastInteractionRef.current < INTERACTION_LOCK_MS) return false;
+    lastInteractionRef.current = now;
+    return true;
+  };
+
   // Slider controls
   const openPreviewAt = (index) => {
     if (!images.length) return;
@@ -93,6 +103,7 @@ export default function RoomModal({ isOpen, onClose, room }) {
   };
 
   const next = useCallback(() => {
+    if (!interactionAllowed()) return; // guard double triggers
     if (images.length === 0) return;
     setPreviewIndex((prev) => {
       if (prev === null) return 0;
@@ -101,6 +112,7 @@ export default function RoomModal({ isOpen, onClose, room }) {
   }, [images.length]);
 
   const prev = useCallback(() => {
+    if (!interactionAllowed()) return; // guard double triggers
     if (images.length === 0) return;
     setPreviewIndex((prev) => {
       if (prev === null) return images.length - 1;
@@ -113,6 +125,9 @@ export default function RoomModal({ isOpen, onClose, room }) {
     if (autoplayIntervalRef.current) return;
     if (images.length <= 1) return;
     autoplayIntervalRef.current = setInterval(() => {
+      // allow autoplay even if inside lock window but skip if recently interacted
+      const now = Date.now();
+      if (now - lastInteractionRef.current < INTERACTION_LOCK_MS) return;
       setPreviewIndex((prev) => {
         if (prev === null) return 0;
         return (prev + 1) % images.length;
@@ -134,6 +149,8 @@ export default function RoomModal({ isOpen, onClose, room }) {
   function pauseAutoplayTemporarily() {
     // stop autoplay now and resume after PAUSE_AFTER_INTERACTION_MS
     clearAutoplay();
+    // mark last interaction to avoid immediate autoplay step
+    lastInteractionRef.current = Date.now();
     pauseTimeoutRef.current = setTimeout(() => {
       startAutoplay();
       pauseTimeoutRef.current = null;
@@ -208,14 +225,15 @@ export default function RoomModal({ isOpen, onClose, room }) {
     touchEndXRef.current = null;
   };
 
-  // Pointer (mouse/pen) drag support - limited but helpful for touchpads
+  // Pointer (mouse/pen) drag support - ignore pointer events that are touch (to avoid double fire)
   const onPointerDown = (e) => {
+    if (e.pointerType === "touch") return; // let touch handlers handle it
     pointerStartXRef.current = e.clientX;
-    // Capture pointermove events until pointerup
     e.currentTarget?.setPointerCapture?.(e.pointerId);
   };
 
   const onPointerUp = (e) => {
+    if (e.pointerType === "touch") return; // ignore if touch
     const start = pointerStartXRef.current;
     const end = e.clientX;
     if (start == null) return;
@@ -229,7 +247,6 @@ export default function RoomModal({ isOpen, onClose, room }) {
       pauseAutoplayTemporarily();
     }
     pointerStartXRef.current = null;
-    // release capture if set
     e.currentTarget?.releasePointerCapture?.(e.pointerId);
   };
 
@@ -425,6 +442,7 @@ export default function RoomModal({ isOpen, onClose, room }) {
                 <button
                   key={i}
                   onClick={() => {
+                    if (!interactionAllowed()) return;
                     setPreviewIndex(i);
                     pauseAutoplayTemporarily();
                   }}
