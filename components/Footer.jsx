@@ -28,7 +28,7 @@ const contactDetails = [
   },
   {
     icon: <FaEnvelope className="text-[#C4C4C4]" />,
-    text: "towsonhomes92@gmail.com",
+    text: "hr@stayintowsonhomes.com",
   },
 ];
 
